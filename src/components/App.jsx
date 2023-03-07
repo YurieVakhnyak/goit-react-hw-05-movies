@@ -3,6 +3,7 @@ import Home from 'pages/Home/Home';
 import { Movies } from 'pages/Movies/Movies';
 import { SharedLayout } from './SharedLayout/SharedLayout';
 import MoviesDetails from '../pages/MoviesDetails/MoviesDetails';
+import MovieCast from './MovieCast/MovieCast';
 
 export const App = () => {
   return (
@@ -12,7 +13,9 @@ export const App = () => {
         <Route path="movies" element={<Movies />}>
           <Route path="somemovies" element={<div>Some Movies</div>} />
         </Route>
-        <Route path="movies/:id" element={<MoviesDetails />} />
+        <Route path="movies/:id" element={<MoviesDetails />}>
+          <Route path="get-movie-credits" element={<MovieCast />} />
+        </Route>
       </Route>
     </Routes>
   );

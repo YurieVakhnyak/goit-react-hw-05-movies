@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
 
 export default function MoviesDetails() {
   const { id } = useParams();
@@ -56,9 +56,10 @@ export default function MoviesDetails() {
         </div>
         <div>
           <h2>Additionals information</h2>
-          <Link>Cast</Link>
+          <Link to="get-movie-credits">Cast</Link>
           <Link>Reviews</Link>
         </div>
+        <Outlet />
       </main>
     );
   }
