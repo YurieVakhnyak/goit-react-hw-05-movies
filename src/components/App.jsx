@@ -1,7 +1,8 @@
 import { Routes, Route } from 'react-router-dom';
-import { Home } from 'pages/Home';
-import { Movies } from 'pages/Movies';
+import Home from 'pages/Home/Home';
+import { Movies } from 'pages/Movies/Movies';
 import { SharedLayout } from './SharedLayout/SharedLayout';
+import MoviesDetails from '../pages/MoviesDetails/MoviesDetails';
 
 export const App = () => {
   return (
@@ -11,6 +12,7 @@ export const App = () => {
         <Route path="movies" element={<Movies />}>
           <Route path="somemovies" element={<div>Some Movies</div>} />
         </Route>
+        <Route path="movies/:id" element={<MoviesDetails />} />
       </Route>
     </Routes>
   );
