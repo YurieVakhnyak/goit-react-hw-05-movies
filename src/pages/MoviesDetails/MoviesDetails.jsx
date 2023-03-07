@@ -56,8 +56,8 @@ export default function MoviesDetails() {
         </div>
         <div>
           <h2>Additionals information</h2>
-          <Link to="get-movie-credits">Cast</Link>
-          <Link>Reviews</Link>
+          <Link to="get-movie-credits"> Cast </Link>
+          <Link to="get-movie-reviews"> Reviews </Link>
         </div>
         <Outlet />
       </main>

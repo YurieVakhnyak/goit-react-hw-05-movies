@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { Container } from './Home.styled';
+import styled from './Home.styled';
 
 export default function Home() {
   const [trending, setTrending] = useState(null);
@@ -30,7 +32,7 @@ export default function Home() {
 
   if (trending) {
     return (
-      <main>
+      <Container>
         <p>Trending today</p>
 
         <ul>
@@ -40,7 +42,7 @@ export default function Home() {
             </li>
           ))}
         </ul>
-      </main>
+      </Container>
     );
   }
   return (

@@ -4,6 +4,7 @@ import { Movies } from 'pages/Movies/Movies';
 import { SharedLayout } from './SharedLayout/SharedLayout';
 import MoviesDetails from '../pages/MoviesDetails/MoviesDetails';
 import MovieCast from './MovieCast/MovieCast';
+import MovieReviews from './MovieReviews/MovieReviews';
 
 export const App = () => {
   return (
@@ -15,6 +16,7 @@ export const App = () => {
         </Route>
         <Route path="movies/:id" element={<MoviesDetails />}>
           <Route path="get-movie-credits" element={<MovieCast />} />
+          <Route path="get-movie-reviews" element={<MovieReviews />} />
         </Route>
       </Route>
     </Routes>

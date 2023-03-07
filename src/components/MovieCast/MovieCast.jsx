@@ -6,8 +6,6 @@ export default function MovieCast() {
   const [movieCast, setMovieCast] = useState(null);
   const [error, setError] = useState(null);
 
-  console.log('MoviemovieCast');
-
   const API_KEY = 'b30750fbe582936755a0930282f9befd';
 
   useEffect(() => {
@@ -27,7 +25,6 @@ export default function MovieCast() {
       })
       .then(movieCast => {
         setMovieCast(movieCast);
-        console.log(movieCast.id);
       })
       .catch(error => {
         setError(error);
@@ -36,6 +33,9 @@ export default function MovieCast() {
 
   if (movieCast) {
     const { cast } = movieCast;
+    const basicImageURL = 'https://image.tmdb.org/t/p/w200';
+    const avatarNoImage =
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTI3Ct05TQbMP8-OQs3kIZny_cQd3UyUsn6GA&usqp=CAU';
 
     return (
       <main>
@@ -43,11 +43,16 @@ export default function MovieCast() {
           {cast.map(({ id, name, profile_path, character }) => (
             <li key={id}>
               <img
-                src={`https://image.tmdb.org/t/p/w200${profile_path}`}
+                src={
+                  profile_path !== null
+                    ? basicImageURL + profile_path
+                    : avatarNoImage
+                }
                 alt={name}
+                width={200}
               />
               <h1>{name}</h1>
-              <p>Character: {character}</p>
+              <p>Character: {character !== '' ? character : 'No results'}</p>
             </li>
           ))}
         </ul>
