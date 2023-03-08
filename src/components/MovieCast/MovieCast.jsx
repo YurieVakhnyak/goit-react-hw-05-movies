@@ -36,7 +36,6 @@ export default function MovieCast() {
   if (movieCast) {
     const { cast } = movieCast;
     const basicImageURL = 'https://image.tmdb.org/t/p/w200';
-    const avatarNoImage = './NoPhoto.png';
 
     return (
       <div>

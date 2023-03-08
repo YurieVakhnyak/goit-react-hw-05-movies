@@ -2,12 +2,17 @@ import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { Link, Outlet } from 'react-router-dom';
 import { Container, Title } from 'pages/Home/Home.styled';
+
+import { FaLongArrowAltLeft } from 'react-icons/fa';
 import {
   MediumTitle,
+  GenreList,
+  BoxInside,
   Box,
   Thumb,
   InfoBox,
   MoreInfoBox,
+  Button,
 } from './MoviesDetails.styled';
 
 export default function MoviesDetails() {
@@ -43,24 +48,26 @@ export default function MoviesDetails() {
     return (
       <Container>
         <Box>
-          {/* {' '} */}
-          <div>
+          <BoxInside>
             <Link to="/">
-              <button>Go back</button>
+              <Button>
+                <FaLongArrowAltLeft />
+                Go back
+              </Button>
             </Link>
             <img src={posterURL} alt={title} />
-          </div>
+          </BoxInside>
           <InfoBox>
             <Title>{title}</Title>
             <p>User score: {Math.floor(vote_average * 10)}%</p>
             <MediumTitle>Overview</MediumTitle>
             <p>{overview}</p>
             <MediumTitle>Genres</MediumTitle>
-            <ul>
+            <GenreList>
               {genres.map(({ id, name }) => (
                 <li key={id}>{name}</li>
               ))}
-            </ul>
+            </GenreList>
           </InfoBox>
         </Box>
         <MoreInfoBox>

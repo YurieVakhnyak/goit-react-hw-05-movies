@@ -51,7 +51,7 @@ export default function MovieReviews() {
     } else {
       return (
         <main>
-          <p>No reviews finding</p>
+          <p>We don't have any reviews for this movie</p>
         </main>
       );
     }

@@ -7,7 +7,16 @@
   height: 40px;
   padding-left: 20px;
   font-size: x-large;
+  display: flex;
 
   text-align: center;
   align-items: center;
 }
+
+/* li {
+  list-style: none;
+  background-image: url(/images/film-icon-2.png);
+  background-repeat: no-repeat;
+  background-position: left center;
+  background-size: 15px;
+} */

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Container, Title, LiDecor } from './Home.styled';
+import { HiFilm } from 'react-icons/hi';
 
 export default function Home() {
   const [trending, setTrending] = useState(null);
@@ -36,6 +37,7 @@ export default function Home() {
         <ul>
           {trending.results.map(({ id, title }) => (
             <LiDecor key={id}>
+              <HiFilm />
               <Link to={`movies/${id}`}>{title}</Link>
             </LiDecor>
           ))}
