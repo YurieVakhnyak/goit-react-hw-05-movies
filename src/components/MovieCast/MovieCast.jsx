@@ -1,5 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import { Text, Card, CastList, Image } from './MovieCast.styled';
+import myImage from './NoPhoto.png';
 
 export default function MovieCast() {
   const { id } = useParams();
@@ -34,35 +36,37 @@ export default function MovieCast() {
   if (movieCast) {
     const { cast } = movieCast;
     const basicImageURL = 'https://image.tmdb.org/t/p/w200';
-    const avatarNoImage =
-      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTI3Ct05TQbMP8-OQs3kIZny_cQd3UyUsn6GA&usqp=CAU';
+    const avatarNoImage = './NoPhoto.png';
 
     return (
-      <main>
-        <ul>
+      <div>
+        <CastList>
           {cast.map(({ id, name, profile_path, character }) => (
             <li key={id}>
-              <img
-                src={
-                  profile_path !== null
-                    ? basicImageURL + profile_path
-                    : avatarNoImage
-                }
-                alt={name}
-                width={200}
-              />
-              <h1>{name}</h1>
-              <p>Character: {character !== '' ? character : 'No results'}</p>
+              <Card>
+                <Image
+                  src={
+                    profile_path !== null
+                      ? basicImageURL + profile_path
+                      : myImage
+                  }
+                  alt={name}
+                />
+                <p>{name}</p>
+                <Text>
+                  Character: {character !== '' ? character : 'No results'}
+                </Text>
+              </Card>
             </li>
           ))}
-        </ul>
-      </main>
+        </CastList>
+      </div>
     );
   }
   return (
-    <main>
+    <div>
       <p>Cast</p>
       <p>Searching...</p>
-    </main>
+    </div>
   );
 }

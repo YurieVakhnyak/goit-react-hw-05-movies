@@ -1,5 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import { Text } from 'components/MovieCast/MovieCast.styled';
+import { ReviewTitle } from './MovieReviews.styled';
 
 export default function MovieReviews() {
   const { id } = useParams();
@@ -39,8 +41,8 @@ export default function MovieReviews() {
           <ul>
             {results.map(({ author, content }) => (
               <li key={author}>
-                <h3>{author}</h3>
-                <p>{content}</p>
+                <ReviewTitle>{author}</ReviewTitle>
+                <Text>{content}</Text>
               </li>
             ))}
           </ul>

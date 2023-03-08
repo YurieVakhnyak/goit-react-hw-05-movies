@@ -1,6 +1,14 @@
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { Link, Outlet } from 'react-router-dom';
+import { Container, Title } from 'pages/Home/Home.styled';
+import {
+  MediumTitle,
+  Box,
+  Thumb,
+  InfoBox,
+  MoreInfoBox,
+} from './MoviesDetails.styled';
 
 export default function MoviesDetails() {
   const { id } = useParams();
@@ -10,11 +18,7 @@ export default function MoviesDetails() {
   const API_KEY = 'b30750fbe582936755a0930282f9befd';
 
   useEffect(() => {
-    const searchParams = new URLSearchParams({
-      api_key: API_KEY,
-    });
-
-    const URL = `https://api.themoviedb.org/3/movie/${id}?${searchParams}`;
+    const URL = `https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}`;
 
     setMovie(null);
     fetch(URL)
@@ -37,36 +41,44 @@ export default function MoviesDetails() {
     const posterURL = `https://image.tmdb.org/t/p/w500${backdrop_path}`;
 
     return (
-      <main>
-        <Link to="/">
-          <button>Go back</button>
-        </Link>
-        <div>
-          <img src={posterURL} alt={title} />
-          <h1>{title}</h1>
-          <p>User score: {Math.floor(vote_average * 10)}%</p>
-          <h2>Overview</h2>
-          <p>{overview}</p>
-          <h2>Genres</h2>
-          <ul>
-            {genres.map(({ id, name }) => (
-              <li key={id}>{name}</li>
-            ))}
-          </ul>
-        </div>
-        <div>
-          <h2>Additionals information</h2>
-          <Link to="get-movie-credits"> Cast </Link>
-          <Link to="get-movie-reviews"> Reviews </Link>
-        </div>
+      <Container>
+        <Box>
+          {/* {' '} */}
+          <div>
+            <Link to="/">
+              <button>Go back</button>
+            </Link>
+            <img src={posterURL} alt={title} />
+          </div>
+          <InfoBox>
+            <Title>{title}</Title>
+            <p>User score: {Math.floor(vote_average * 10)}%</p>
+            <MediumTitle>Overview</MediumTitle>
+            <p>{overview}</p>
+            <MediumTitle>Genres</MediumTitle>
+            <ul>
+              {genres.map(({ id, name }) => (
+                <li key={id}>{name}</li>
+              ))}
+            </ul>
+          </InfoBox>
+        </Box>
+        <MoreInfoBox>
+          <MediumTitle>Additionals information</MediumTitle>
+          <Thumb>
+            <Link to="get-movie-credits"> Cast </Link>
+            <Link to="get-movie-reviews"> Reviews </Link>
+          </Thumb>
+        </MoreInfoBox>
+
         <Outlet />
-      </main>
+      </Container>
     );
   }
   return (
-    <main>
+    <Container>
       <p>Movie</p>
       <p>Searching...</p>
-    </main>
+    </Container>
   );
 }

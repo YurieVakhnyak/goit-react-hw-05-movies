@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Container } from './Home.styled';
-import styled from './Home.styled';
+import { Container, Title, LiDecor } from './Home.styled';
 
 export default function Home() {
   const [trending, setTrending] = useState(null);
@@ -33,22 +32,21 @@ export default function Home() {
   if (trending) {
     return (
       <Container>
-        <p>Trending today</p>
-
+        <Title>Trending today</Title>
         <ul>
           {trending.results.map(({ id, title }) => (
-            <li key={id}>
+            <LiDecor key={id}>
               <Link to={`movies/${id}`}>{title}</Link>
-            </li>
+            </LiDecor>
           ))}
         </ul>
       </Container>
     );
   }
   return (
-    <main>
+    <Container>
       <p>Trending today</p>
-      <p>Searching...</p>
-    </main>
+      <p>{error}</p>
+    </Container>
   );
 }

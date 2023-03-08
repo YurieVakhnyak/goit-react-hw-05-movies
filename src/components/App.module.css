@@ -1,5 +1,13 @@
 .header {
   display: flex;
   gap: 30px;
-  background-color: aquamarine;
+  background-color: darkcyan;
+  /* background-color: cadetblue; */
+
+  height: 40px;
+  padding-left: 20px;
+  font-size: x-large;
+
+  text-align: center;
+  align-items: center;
 }
