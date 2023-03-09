@@ -82,10 +82,5 @@ export default function MoviesDetails() {
       </Container>
     );
   }
-  return (
-    <Container>
-      <p>Movie</p>
-      <p>Searching...</p>
-    </Container>
-  );
+  return <Container>{error ? error.message : <p>Searching...</p>}</Container>;
 }

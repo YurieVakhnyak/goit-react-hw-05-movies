@@ -62,10 +62,5 @@ export default function MovieCast() {
       </div>
     );
   }
-  return (
-    <div>
-      <p>Cast</p>
-      <p>Searching...</p>
-    </div>
-  );
+  return <div>{error ? error.message : <p>Searching...</p>}</div>;
 }

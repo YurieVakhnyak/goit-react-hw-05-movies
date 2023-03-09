@@ -45,10 +45,5 @@ export default function Home() {
       </Container>
     );
   }
-  return (
-    <Container>
-      <p>Trending today</p>
-      <p>{error}</p>
-    </Container>
-  );
+  return <Container>{error ? error.message : <p>Searching...</p>}</Container>;
 }
