@@ -20,7 +20,7 @@ export default function MoviesDetails() {
   const [error, setError] = useState(null);
 
   const location = useLocation();
-  console.log(location.state);
+  // console.log(location.state);
 
   const backLinkHref = location.state?.from ?? '/movies';
 
