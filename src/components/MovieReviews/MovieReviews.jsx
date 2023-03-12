@@ -49,7 +49,11 @@ export default function MovieReviews() {
         </main>
       );
     } else {
-      return <main>{error ? error.message : <p>Searching...</p>}</main>;
+      return (
+        <main>
+          {error ? error.message : <p>We couldn't find any reviews</p>}
+        </main>
+      );
     }
   }
 }

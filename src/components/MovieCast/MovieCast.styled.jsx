@@ -14,7 +14,7 @@ export const Image = styled.img`
   height: 150px;
 `;
 
-export const Card = styled.p`
+export const Card = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;

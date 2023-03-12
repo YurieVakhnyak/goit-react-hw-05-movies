@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+
 import { Container, Title, LiDecor } from './Home.styled';
 import { HiFilm } from 'react-icons/hi';
 
@@ -8,6 +9,7 @@ export default function Home() {
   const [error, setError] = useState(null);
 
   const API_KEY = 'b30750fbe582936755a0930282f9befd';
+  const location = useLocation();
 
   useEffect(() => {
     const searchParams = new URLSearchParams({
@@ -35,10 +37,12 @@ export default function Home() {
       <Container>
         <Title>Trending today</Title>
         <ul>
-          {trending.results.map(({ id, title }) => (
+          {trending.results.map(({ id, title, release_date }) => (
             <LiDecor key={id}>
               <HiFilm />
-              <Link to={`movies/${id}`}>{title}</Link>
+              <Link to={`movies/${id}`} state={{ from: location }}>
+                {title} ({release_date.slice(0, 4)})
+              </Link>
             </LiDecor>
           ))}
         </ul>

@@ -1,8 +1,7 @@
 import { useParams } from 'react-router-dom';
-import { useState, useEffect } from 'react';
-import { Link, Outlet } from 'react-router-dom';
+import { useState, useEffect, Suspense } from 'react';
+import { Link, Outlet, useLocation } from 'react-router-dom';
 import { Container, Title } from 'pages/Home/Home.styled';
-
 import { FaLongArrowAltLeft } from 'react-icons/fa';
 import {
   MediumTitle,
@@ -19,6 +18,11 @@ export default function MoviesDetails() {
   const { id } = useParams();
   const [movie, setMovie] = useState(null);
   const [error, setError] = useState(null);
+
+  const location = useLocation();
+  console.log(location.state);
+
+  const backLinkHref = location.state?.from ?? '/movies';
 
   const API_KEY = 'b30750fbe582936755a0930282f9befd';
 
@@ -42,14 +46,21 @@ export default function MoviesDetails() {
   }, [id]);
 
   if (movie) {
-    const { backdrop_path, title, vote_average, overview, genres } = movie;
+    const {
+      backdrop_path,
+      title,
+      release_date,
+      vote_average,
+      overview,
+      genres,
+    } = movie;
     const posterURL = `https://image.tmdb.org/t/p/w500${backdrop_path}`;
 
     return (
       <Container>
         <Box>
           <BoxInside>
-            <Link to="/">
+            <Link to={backLinkHref}>
               <Button>
                 <FaLongArrowAltLeft />
                 Go back
@@ -60,6 +71,7 @@ export default function MoviesDetails() {
           <InfoBox>
             <Title>{title}</Title>
             <p>User score: {Math.floor(vote_average * 10)}%</p>
+            <p>Release date: {release_date}</p>
             <MediumTitle>Overview</MediumTitle>
             <p>{overview}</p>
             <MediumTitle>Genres</MediumTitle>
@@ -73,12 +85,18 @@ export default function MoviesDetails() {
         <MoreInfoBox>
           <MediumTitle>Additionals information</MediumTitle>
           <Thumb>
-            <Link to="get-movie-credits"> Cast </Link>
-            <Link to="get-movie-reviews"> Reviews </Link>
+            <Link to="get-movie-credits" state={{ from: location.state.from }}>
+              Cast
+            </Link>
+            <Link to="get-movie-reviews" state={{ from: location.state.from }}>
+              {' '}
+              Reviews{' '}
+            </Link>
           </Thumb>
         </MoreInfoBox>
-
-        <Outlet />
+        <Suspense fallback={<div>Loading subpage...</div>}>
+          <Outlet />
+        </Suspense>
       </Container>
     );
   }
