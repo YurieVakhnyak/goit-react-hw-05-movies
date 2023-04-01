@@ -1,12 +1,12 @@
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { Text, Card, CastList, Image } from './MovieCast.styled';
-import myImage from './NoPhoto.png';
+import hasNotPhotoImage from './NoPhoto.png';
 
 export default function MovieCast() {
-  const { id } = useParams();
   const [movieCast, setMovieCast] = useState(null);
   const [error, setError] = useState(null);
+  const { id } = useParams();
 
   const API_KEY = 'b30750fbe582936755a0930282f9befd';
 
@@ -23,7 +23,7 @@ export default function MovieCast() {
         if (response.ok) {
           return response.json();
         }
-        return Promise.reject(new Error('Щось не так...'));
+        return Promise.reject(new Error('Something happened...'));
       })
       .then(movieCast => {
         setMovieCast(movieCast);
@@ -42,20 +42,22 @@ export default function MovieCast() {
         <CastList>
           {cast.map(({ id, name, profile_path, character }) => (
             <li key={id}>
-              <Card>
-                <Image
-                  src={
-                    profile_path !== null
-                      ? basicImageURL + profile_path
-                      : myImage
-                  }
-                  alt={name}
-                />
-                <p>{name}</p>
-                <Text>
-                  Character: {character !== '' ? character : 'No results'}
-                </Text>
-              </Card>
+              <Link to={`/person/${id}`}>
+                <Card>
+                  <Image
+                    src={
+                      profile_path
+                        ? basicImageURL + profile_path
+                        : hasNotPhotoImage
+                    }
+                    alt={name}
+                  />
+                  <p>{name}</p>
+                  <Text>
+                    Character: {character !== '' ? character : 'No results'}
+                  </Text>
+                </Card>
+              </Link>
             </li>
           ))}
         </CastList>

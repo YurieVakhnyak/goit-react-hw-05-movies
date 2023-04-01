@@ -13,12 +13,12 @@ import {
   MoreInfoBox,
   Button,
 } from './MoviesDetails.styled';
+import hasNotPosterImage from './NoFilmImage.png';
 
 export default function MoviesDetails() {
-  const { id } = useParams();
   const [movie, setMovie] = useState(null);
   const [error, setError] = useState(null);
-
+  const { id } = useParams();
   const location = useLocation();
 
   const backLinkHref = location.state?.from ?? '/movies';
@@ -68,7 +68,10 @@ export default function MoviesDetails() {
                 Go back
               </Button>
             </Link>
-            <img src={posterURL} alt={title} />
+            <img
+              src={backdrop_path ? posterURL : hasNotPosterImage}
+              alt={title}
+            />
           </BoxInside>
           <InfoBox>
             <Title>{title}</Title>
