@@ -30,7 +30,7 @@ const Movies = () => {
           if (response.ok) {
             return response.json();
           }
-          return Promise.reject(new Error('Щось не так...'));
+          return Promise.reject(new Error('Something happened...'));
         })
         .then(movies => {
           setMovies(movies);

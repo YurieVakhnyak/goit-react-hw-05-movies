@@ -43,6 +43,9 @@ export const Button = styled.button`
   background-color: lightseagreen;
   border-radius: 5px;
   border-color: lightseagreen;
+  &: hover {
+    cursor: pointer;
+  }
 `;
 
 export const MediumTitle = styled.h2`

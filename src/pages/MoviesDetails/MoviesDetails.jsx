@@ -20,7 +20,6 @@ export default function MoviesDetails() {
   const [error, setError] = useState(null);
 
   const location = useLocation();
-  // console.log(location.state);
 
   const backLinkHref = location.state?.from ?? '/movies';
 
@@ -56,6 +55,9 @@ export default function MoviesDetails() {
     } = movie;
     const posterURL = `https://image.tmdb.org/t/p/w500${backdrop_path}`;
 
+    const date = new Date(release_date);
+    const formattedDate = date.toUTCString().slice(5, 16);
+
     return (
       <Container>
         <Box>
@@ -71,7 +73,7 @@ export default function MoviesDetails() {
           <InfoBox>
             <Title>{title}</Title>
             <p>User score: {Math.floor(vote_average * 10)}%</p>
-            <p>Release date: {release_date}</p>
+            <p>Release date: {formattedDate}</p>
             <MediumTitle>Overview</MediumTitle>
             <p>{overview}</p>
             <MediumTitle>Genres</MediumTitle>
@@ -89,8 +91,7 @@ export default function MoviesDetails() {
               Cast
             </Link>
             <Link to="get-movie-reviews" state={{ from: location.state.from }}>
-              {' '}
-              Reviews{' '}
+              Reviews
             </Link>
           </Thumb>
         </MoreInfoBox>

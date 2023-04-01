@@ -1,16 +1,15 @@
 import { Suspense } from 'react';
 import { Outlet, Link } from 'react-router-dom';
-
-import css from '../App.module.css';
+import { Navigation } from './SharedLayout.styled';
 
 export const SharedLayout = () => {
   return (
     <div>
       <header>
-        <nav className={css.header}>
+        <Navigation>
           <Link to="/">Home</Link>
           <Link to="/movies">Movies</Link>
-        </nav>
+        </Navigation>
       </header>
       <Suspense fallback={<div>Loading subpage...</div>}>
         <Outlet />
