@@ -64,7 +64,7 @@ export default function Person() {
       });
   }, [id]);
 
-  if (personMoovies) {
+  if (personMoovies && person) {
     const basicImageURL = `https://image.tmdb.org/t/p/w500`;
 
     return (
