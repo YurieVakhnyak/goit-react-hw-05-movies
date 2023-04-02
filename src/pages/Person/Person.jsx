@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Container, LiDecor, Title } from 'pages/Home/Home.styled';
 import { Button, MediumTitle } from 'pages/MoviesDetails/MoviesDetails.styled';
 import {
@@ -20,11 +20,14 @@ export default function Person() {
   const [error, setError] = useState(null);
   const { id } = useParams();
   const location = useLocation();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
-  const goBack = () => {
-    navigate(-1);
-  };
+  const backLinkHref = location.state?.from ?? '/';
+  console.log(backLinkHref);
+
+  // const goBack = () => {
+  //   navigate(-1);
+  // };
 
   const API_KEY = 'b30750fbe582936755a0930282f9befd';
 
@@ -66,32 +69,45 @@ export default function Person() {
 
   if (personMoovies && person) {
     const basicImageURL = `https://image.tmdb.org/t/p/w500`;
+    const { name, profile_path, birthday, deathday } = person;
+
+    const formatteDate = dateValue => {
+      if (dateValue) {
+        const date = new Date(dateValue);
+        return date.toUTCString().slice(5, 16);
+      }
+      return ' - - - ';
+    };
+    const formattedBirthday = formatteDate(birthday);
+    const formattedDeathday = formatteDate(deathday);
 
     return (
       <div>
         <ButtonBox>
-          <Button onClick={goBack}>
-            <FaLongArrowAltLeft />
-            Go back
-          </Button>
+          <Link to={backLinkHref}>
+            <Button
+            // onClick={goBack}
+            >
+              <FaLongArrowAltLeft />
+              Go back
+            </Button>
+          </Link>
         </ButtonBox>
         <PersonContainer>
           <PersonBox>
             <img
               src={
-                person.profile_path
-                  ? basicImageURL + person.profile_path
-                  : hasNotPhotoImage
+                profile_path ? basicImageURL + profile_path : hasNotPhotoImage
               }
-              alt={person.name}
+              alt={name}
               height={281}
             />
-            {person ? <Title>{person.name}</Title> : <Title>Person Name</Title>}
-            {person.birthday ? (
-              <MediumTitle>({person.birthday.slice(0, 4)})</MediumTitle>
-            ) : (
-              <MediumTitle> - - - - </MediumTitle>
-            )}
+            {<Title>{name}</Title>}
+            <MediumTitle>
+              {deathday
+                ? `(${formattedBirthday} - ${formattedDeathday})`
+                : `(${formattedBirthday})`}
+            </MediumTitle>
           </PersonBox>
           <FilmBox>
             <MediumTitle style={{ textAlign: 'center', marginBottom: '20px' }}>
@@ -102,7 +118,7 @@ export default function Person() {
                 <LiDecor key={id}>
                   <HiFilm />
                   <Link to={`/movies/${id}`} state={{ from: location }}>
-                    {title} ({release_date.slice(0, 4)})
+                    {title} ({release_date?.slice(0, 4) ?? '- - - -'})
                   </Link>
                 </LiDecor>
               ))}

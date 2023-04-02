@@ -21,7 +21,7 @@ export default function MoviesDetails() {
   const { id } = useParams();
   const location = useLocation();
 
-  const backLinkHref = location.state?.from ?? '/movies';
+  const backLinkHref = location.state?.from ?? '/';
 
   const API_KEY = 'b30750fbe582936755a0930282f9befd';
 
@@ -90,10 +90,10 @@ export default function MoviesDetails() {
         <MoreInfoBox>
           <MediumTitle>Additionals information</MediumTitle>
           <Thumb>
-            <Link to="get-movie-credits" state={{ from: location.state.from }}>
+            <Link to="get-movie-credits" state={{ from: location.state?.from }}>
               Cast
             </Link>
-            <Link to="get-movie-reviews" state={{ from: location.state.from }}>
+            <Link to="get-movie-reviews" state={{ from: location.state?.from }}>
               Reviews
             </Link>
           </Thumb>
