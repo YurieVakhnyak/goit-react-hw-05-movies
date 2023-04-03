@@ -3,6 +3,9 @@ import { useState, useEffect, Suspense } from 'react';
 import { Link, Outlet, useLocation } from 'react-router-dom';
 import { Container, Title } from 'pages/Home/Home.styled';
 import { FaLongArrowAltLeft } from 'react-icons/fa';
+import { fetchData } from 'utils/fetchData';
+import { formateDate, voteToPersent } from 'utils/functions';
+import { searchParams, basicURL, basicBigImageURL } from 'utils/constants';
 import {
   MediumTitle,
   GenreList,
@@ -23,25 +26,9 @@ export default function MoviesDetails() {
 
   const backLinkHref = location.state?.from ?? '/';
 
-  const API_KEY = 'b30750fbe582936755a0930282f9befd';
-
   useEffect(() => {
-    const URL = `https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}`;
-
-    setMovie(null);
-    fetch(URL)
-      .then(response => {
-        if (response.ok) {
-          return response.json();
-        }
-        return Promise.reject(new Error('Щось не так...'));
-      })
-      .then(movie => {
-        setMovie(movie);
-      })
-      .catch(error => {
-        setError(error);
-      });
+    const URL = `${basicURL}/movie/${id}?${searchParams}`;
+    fetchData(URL, setMovie, setError);
   }, [id]);
 
   if (movie) {
@@ -53,10 +40,7 @@ export default function MoviesDetails() {
       overview,
       genres,
     } = movie;
-    const posterURL = `https://image.tmdb.org/t/p/w500${backdrop_path}`;
-
-    const date = new Date(release_date);
-    const formattedDate = date.toUTCString().slice(5, 16);
+    const posterURL = `${basicBigImageURL}${backdrop_path}`;
 
     return (
       <Container>
@@ -75,8 +59,8 @@ export default function MoviesDetails() {
           </BoxInside>
           <InfoBox>
             <Title>{title}</Title>
-            <p>User score: {Math.floor(vote_average * 10)}%</p>
-            <p>Release date: {formattedDate}</p>
+            <p>User score: {voteToPersent(vote_average)}</p>
+            <p>Release date: {formateDate(release_date)}</p>
             <MediumTitle>Overview</MediumTitle>
             <p>{overview}</p>
             <MediumTitle>Genres</MediumTitle>

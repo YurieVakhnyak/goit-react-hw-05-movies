@@ -1,6 +1,8 @@
 import { useParams, Link, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { Text, Card, CastList, Image } from './MovieCast.styled';
+import { fetchData } from 'utils/fetchData';
+import { searchParams, basicURL, basicSmallImageURL } from 'utils/constants';
 import hasNotPhotoImage from './NoPhoto.png';
 
 export default function MovieCast() {
@@ -9,34 +11,13 @@ export default function MovieCast() {
   const { id } = useParams();
   const location = useLocation();
 
-  const API_KEY = 'b30750fbe582936755a0930282f9befd';
-
   useEffect(() => {
-    const searchParams = new URLSearchParams({
-      api_key: API_KEY,
-    });
-
-    const URL = `https://api.themoviedb.org/3/movie/${id}/credits?${searchParams}`;
-
-    setMovieCast(null);
-    fetch(URL)
-      .then(response => {
-        if (response.ok) {
-          return response.json();
-        }
-        return Promise.reject(new Error('Something happened...'));
-      })
-      .then(movieCast => {
-        setMovieCast(movieCast);
-      })
-      .catch(error => {
-        setError(error);
-      });
+    const URL = `${basicURL}/movie/${id}/credits?${searchParams}`;
+    fetchData(URL, setMovieCast, setError);
   }, [id]);
 
   if (movieCast) {
     const { cast } = movieCast;
-    const basicImageURL = 'https://image.tmdb.org/t/p/w200';
 
     return (
       <div>
@@ -48,7 +29,7 @@ export default function MovieCast() {
                   <Image
                     src={
                       profile_path
-                        ? basicImageURL + profile_path
+                        ? basicSmallImageURL + profile_path
                         : hasNotPhotoImage
                     }
                     alt={name}

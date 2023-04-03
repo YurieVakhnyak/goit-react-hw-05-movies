@@ -3,41 +3,29 @@ import { Link, useSearchParams, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { HiFilm } from 'react-icons/hi';
 import { SearchBar } from '../../components/SearchBar/SearchBar';
+import { fetchData } from 'utils/fetchData';
+import { API_KEY, basicURL } from 'utils/constants';
 
 const Movies = () => {
   const [movies, setMovies] = useState(null);
   const [error, setError] = useState(null);
   const [searchParams, setSearchParams] = useSearchParams();
-
   const location = useLocation();
 
   const handleSearchParams = value => {
     setSearchParams(value !== '' ? { query: value } : {});
   };
   const queryInput = searchParams.get('query') ?? '';
-  const API_KEY = 'b30750fbe582936755a0930282f9befd';
 
   useEffect(() => {
     const searchParams = new URLSearchParams({
       api_key: API_KEY,
       query: queryInput,
     });
+    const URL = `${basicURL}/search/movie?${searchParams}`;
 
-    setMovies(null);
     if (queryInput !== '' || queryInput !== null) {
-      fetch(`https://api.themoviedb.org/3/search/movie?${searchParams}`)
-        .then(response => {
-          if (response.ok) {
-            return response.json();
-          }
-          return Promise.reject(new Error('Something happened...'));
-        })
-        .then(movies => {
-          setMovies(movies);
-        })
-        .catch(error => {
-          setError(error);
-        });
+      fetchData(URL, setMovies, setError);
     }
   }, [queryInput]);
 

@@ -12,6 +12,9 @@ import {
 } from './Person.styled';
 import { FaLongArrowAltLeft } from 'react-icons/fa';
 import { HiFilm } from 'react-icons/hi';
+import { fetchData } from 'utils/fetchData';
+import { formateDate } from 'utils/functions';
+import { searchParams, basicURL, basicBigImageURL } from 'utils/constants';
 import hasNotPhotoImage from '../../components/MovieCast/NoPhoto.png';
 
 export default function Person() {
@@ -20,74 +23,29 @@ export default function Person() {
   const [error, setError] = useState(null);
   const { id } = useParams();
   const location = useLocation();
-  // const navigate = useNavigate();
 
   const backLinkHref = location.state?.from ?? '/';
   console.log(backLinkHref);
 
-  // const goBack = () => {
-  //   navigate(-1);
-  // };
-
-  const API_KEY = 'b30750fbe582936755a0930282f9befd';
-
   useEffect(() => {
-    const URL = `https://api.themoviedb.org/3/person/${id}/movie_credits?api_key=${API_KEY}`;
-    const personURL = `https://api.themoviedb.org/3/person/${id}?api_key=${API_KEY}`;
+    const URL = `${basicURL}/person/${id}/movie_credits?${searchParams}`;
+    const personURL = `${basicURL}/person/${id}?${searchParams}`;
 
-    setPerson(null);
-    setPersonMoovies(null);
-
-    fetch(personURL)
-      .then(response => {
-        if (response.ok) {
-          return response.json();
-        }
-        return Promise.reject(new Error('Щось не так...'));
-      })
-      .then(person => {
-        setPerson(person);
-      })
-      .catch(error => {
-        setError(error);
-      });
-
-    fetch(URL)
-      .then(response => {
-        if (response.ok) {
-          return response.json();
-        }
-        return Promise.reject(new Error('Щось не так...'));
-      })
-      .then(personMoovies => {
-        setPersonMoovies(personMoovies);
-      })
-      .catch(error => {
-        setError(error);
-      });
+    fetchData(URL, setPersonMoovies, setError);
+    fetchData(personURL, setPerson, setError);
   }, [id]);
 
   if (personMoovies && person) {
-    const basicImageURL = `https://image.tmdb.org/t/p/w500`;
     const { name, profile_path, birthday, deathday } = person;
 
-    const formatteDate = dateValue => {
-      if (dateValue) {
-        const date = new Date(dateValue);
-        return date.toUTCString().slice(5, 16);
-      }
-      return ' - - - ';
-    };
-    const formattedBirthday = formatteDate(birthday);
-    const formattedDeathday = formatteDate(deathday);
+    const formattedBirthday = formateDate(birthday);
+    const formattedDeathday = formateDate(deathday);
 
     return (
       <div>
         <ButtonBox>
           <Link to={backLinkHref}>
-            <Button
-            // onClick={goBack}
-            >
+            <Button>
               <FaLongArrowAltLeft />
               Go back
             </Button>
@@ -97,7 +55,9 @@ export default function Person() {
           <PersonBox>
             <img
               src={
-                profile_path ? basicImageURL + profile_path : hasNotPhotoImage
+                profile_path
+                  ? basicBigImageURL + profile_path
+                  : hasNotPhotoImage
               }
               alt={name}
               height={281}
