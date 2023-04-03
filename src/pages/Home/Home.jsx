@@ -20,11 +20,11 @@ export default function Home() {
   if (trending) {
     return (
       <Container>
+        <Title>{period === 'week' ? 'Trending week' : 'Trending today'}</Title>
         <ButtonsThumb>
           <Button onClick={() => setPeriod('day')}>Day</Button>
           <Button onClick={() => setPeriod('week')}>Week</Button>
         </ButtonsThumb>
-        <Title>{period === 'week' ? 'Trending week' : 'Trending today'}</Title>
         <ul>
           {trending.results.map(({ id, title, release_date }) => (
             <LiDecor key={id}>

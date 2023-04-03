@@ -20,5 +20,5 @@ export const LiDecor = styled.li`
 export const ButtonsThumb = styled.div`
   display: flex;
   gap: 15px;
-  margin: 10px 0 0 5px;
+  margin: 0 0 10px 5px;
 `;
