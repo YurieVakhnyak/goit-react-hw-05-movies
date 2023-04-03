@@ -73,7 +73,7 @@ export default function Person() {
                 <LiDecor key={id}>
                   <HiFilm />
                   <Link to={`/movies/${id}`} state={{ from: location }}>
-                    {title} ({release_date?.slice(0, 4) ?? '- - - -'})
+                    {title} ({release_date?.slice(0, 4) || 'no data'})
                   </Link>
                 </LiDecor>
               ))}
