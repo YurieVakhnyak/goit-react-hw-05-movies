@@ -6,9 +6,9 @@ import { fetchData } from 'utils/fetchData';
 import { searchParams, basicURL } from 'utils/constants';
 
 export default function MovieReviews() {
-  const { id } = useParams();
   const [movieReviews, setMovieReviews] = useState(null);
   const [error, setError] = useState(null);
+  const { id } = useParams();
 
   useEffect(() => {
     const URL = `${basicURL}/movie/${id}/reviews?${searchParams}`;

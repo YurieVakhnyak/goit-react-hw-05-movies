@@ -1,8 +1,9 @@
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { BackLinkButton } from 'components/BackLinkButton/BackLinkButton';
 import { Container, LiDecor, Title } from 'pages/Home/Home.styled';
-import { Button, MediumTitle } from 'pages/MoviesDetails/MoviesDetails.styled';
+import { MediumTitle } from 'pages/MoviesDetails/MoviesDetails.styled';
 import {
   PersonContainer,
   FilmBox,
@@ -10,7 +11,6 @@ import {
   PersonList,
   ButtonBox,
 } from './Person.styled';
-import { FaLongArrowAltLeft } from 'react-icons/fa';
 import { HiFilm } from 'react-icons/hi';
 import { fetchData } from 'utils/fetchData';
 import { formateDate } from 'utils/functions';
@@ -44,12 +44,7 @@ export default function Person() {
     return (
       <div>
         <ButtonBox>
-          <Link to={backLinkHref}>
-            <Button>
-              <FaLongArrowAltLeft />
-              Go back
-            </Button>
-          </Link>
+          <BackLinkButton backLinkHref={backLinkHref} />
         </ButtonBox>
         <PersonContainer>
           <PersonBox>

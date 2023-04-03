@@ -35,19 +35,6 @@ export const BoxInside = styled.div`
   gap: 5px;
 `;
 
-export const Button = styled.button`
-  display: flex;
-  gap: 2px;
-  justify-content: center;
-  align-items: center;
-  background-color: lightseagreen;
-  border-radius: 5px;
-  border-color: lightseagreen;
-  &: hover {
-    cursor: pointer;
-  }
-`;
-
 export const MediumTitle = styled.h2`
   padding-left: 0px;
   margin: 7px 0 7px 0;

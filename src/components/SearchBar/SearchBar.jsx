@@ -1,12 +1,15 @@
+import { FormStyled, SearchText, InputStyled } from './SearchBar.styled';
+
 export const SearchBar = ({ value, onSearch }) => {
   return (
-    <form>
-      <p>Search movie</p>
-      <input
+    <FormStyled>
+      <SearchText>Search movie</SearchText>
+      <InputStyled
         type="text"
+        placeholder="Enter movie name"
         defaultValue={value}
         onChange={evt => onSearch(evt.target.value)}
       />
-    </form>
+    </FormStyled>
   );
 };

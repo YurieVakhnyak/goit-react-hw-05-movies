@@ -2,7 +2,7 @@ import { useParams } from 'react-router-dom';
 import { useState, useEffect, Suspense } from 'react';
 import { Link, Outlet, useLocation } from 'react-router-dom';
 import { Container, Title } from 'pages/Home/Home.styled';
-import { FaLongArrowAltLeft } from 'react-icons/fa';
+import { BackLinkButton } from 'components/BackLinkButton/BackLinkButton';
 import { fetchData } from 'utils/fetchData';
 import { formateDate, voteToPersent } from 'utils/functions';
 import { searchParams, basicURL, basicBigImageURL } from 'utils/constants';
@@ -14,7 +14,6 @@ import {
   Thumb,
   InfoBox,
   MoreInfoBox,
-  Button,
 } from './MoviesDetails.styled';
 import hasNotPosterImage from './NoFilmImage.png';
 
@@ -46,12 +45,7 @@ export default function MoviesDetails() {
       <Container>
         <Box>
           <BoxInside>
-            <Link to={backLinkHref}>
-              <Button>
-                <FaLongArrowAltLeft />
-                Go back
-              </Button>
-            </Link>
+            <BackLinkButton backLinkHref={backLinkHref} />
             <img
               src={backdrop_path ? posterURL : hasNotPosterImage}
               alt={title}
