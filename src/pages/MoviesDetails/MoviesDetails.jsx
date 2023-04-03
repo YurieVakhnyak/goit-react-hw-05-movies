@@ -10,6 +10,7 @@ import {
   MediumTitle,
   GenreList,
   BoxInside,
+  ImageFilm,
   Box,
   Thumb,
   InfoBox,
@@ -46,7 +47,7 @@ export default function MoviesDetails() {
         <Box>
           <BoxInside>
             <BackLinkButton backLinkHref={backLinkHref} />
-            <img
+            <ImageFilm
               src={backdrop_path ? posterURL : hasNotPosterImage}
               alt={title}
             />

@@ -20,6 +20,15 @@ export const MoreInfoBox = styled.div`
   padding: 5px 0 10px 20px;
 `;
 
+export const ImageFilm = styled.img`
+  @media (max-width: 500px) {
+    width: 400px;
+  }
+  @media (max-width: 400px) {
+    width: 350px;
+  }
+`;
+
 export const Thumb = styled.div`
   display: flex;
   flex-direction: column;
