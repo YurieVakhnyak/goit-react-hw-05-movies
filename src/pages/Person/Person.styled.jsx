@@ -6,7 +6,7 @@ export const PersonContainer = styled.div`
   flex-wrap: wrap;
   margin-left: 20px;
   text-align: center;
-  gap: 30px;
+  // gap: 30px;
 `;
 export const PersonList = styled.div`
   column-count: 2;
