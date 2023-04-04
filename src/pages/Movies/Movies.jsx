@@ -30,20 +30,21 @@ const Movies = () => {
   }, [queryInput]);
 
   if (movies) {
+    const sortedMovies = movies.results.sort((a, b) =>
+      b.release_date.localeCompare(a.release_date)
+    );
     return (
       <Container>
         <SearchBar value={queryInput} onSearch={handleSearchParams} />
         <ul>
-          {movies.results
-            .sort((a, b) => b.release_date.localeCompare(a.release_date))
-            .map(({ id, title, release_date }) => (
-              <LiDecor key={id}>
-                <HiFilm />
-                <Link to={`${id}`} state={{ from: location }}>
-                  {title} ({release_date?.slice(0, 4) || 'no data'})
-                </Link>
-              </LiDecor>
-            ))}
+          {sortedMovies.map(({ id, title, release_date }) => (
+            <LiDecor key={id}>
+              <HiFilm />
+              <Link to={`${id}`} state={{ from: location }}>
+                {title} ({release_date?.slice(0, 4) || 'no data'})
+              </Link>
+            </LiDecor>
+          ))}
         </ul>
       </Container>
     );
