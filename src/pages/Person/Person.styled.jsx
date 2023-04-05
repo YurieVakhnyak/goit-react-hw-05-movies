@@ -6,7 +6,7 @@ export const PersonContainer = styled.div`
   margin-left: 20px;
   text-align: center;
 
-  @media (max-width: 750px) {
+  @media (max-width: 900px) {
     flex-wrap: wrap;
   }
 `;
@@ -14,12 +14,8 @@ export const PersonList = styled.div`
   column-count: 1;
   column-gap: 20px;
 
-  @media (min-width: 520px) {
+  @media (min-width: 750px) {
     column-count: 2;
-  }
-
-  @media (min-width: 1024px) {
-    column-count: 3;
   }
 `;
 export const PersonBox = styled.div`
@@ -31,6 +27,11 @@ export const PersonBox = styled.div`
 `;
 export const ButtonBox = styled.div`
   padding: 5px;
+`;
+export const SortBox = styled.div`
+  display: flex;
+  justify-content: center;
+  gap: 5px;
 `;
 export const FilmBox = styled.div`
   text-align: left;

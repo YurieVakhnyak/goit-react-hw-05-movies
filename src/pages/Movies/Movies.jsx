@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { HiFilm } from 'react-icons/hi';
 import { SearchBar } from '../../components/SearchBar/SearchBar';
 import { fetchData } from 'utils/fetchData';
+import { sortByField } from 'utils/functions';
 import { API_KEY, basicURL } from 'utils/constants';
 
 const Movies = () => {
@@ -30,9 +31,7 @@ const Movies = () => {
   }, [queryInput]);
 
   if (movies) {
-    const sortedMovies = movies.results.sort((a, b) =>
-      b.release_date.localeCompare(a.release_date)
-    );
+    const sortedMovies = sortByField(movies.results, 'release_date');
     return (
       <Container>
         <SearchBar value={queryInput} onSearch={handleSearchParams} />
