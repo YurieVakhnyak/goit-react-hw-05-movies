@@ -10,6 +10,7 @@ export default function MovieCast() {
   const [error, setError] = useState(null);
   const { id } = useParams();
   const location = useLocation();
+  console.log('movieCast:', location);
 
   useEffect(() => {
     const URL = `${basicURL}/movie/${id}/credits?${searchParams}`;

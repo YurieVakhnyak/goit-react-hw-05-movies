@@ -2,6 +2,7 @@ import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { RiArrowUpDownFill } from 'react-icons/ri';
 import { Link, useLocation } from 'react-router-dom';
+
 import { BackLinkButton } from 'components/BackLinkButton/BackLinkButton';
 import { Container, LiDecor, Title } from 'pages/Home/Home.styled';
 import { MediumTitle } from 'pages/MoviesDetails/MoviesDetails.styled';
@@ -21,7 +22,12 @@ import {
 } from 'utils/functions';
 import { HiFilm } from 'react-icons/hi';
 import { fetchData } from 'utils/fetchData';
-import { searchParams, basicURL, basicBigImageURL } from 'utils/constants';
+import {
+  searchParams,
+  basicURL,
+  basicSmallImageURL,
+  basicBigImageURL,
+} from 'utils/constants';
 import hasNotPhotoImage from '../../components/MovieCast/NoPhoto.png';
 import { Button } from 'components/BackLinkButton/BackLinkButton.styled';
 
@@ -31,6 +37,8 @@ export default function Person() {
   const [fieldSorted, setFieldSorted] = useState(null);
   const [order, setOrder] = useState('desc');
   const [error, setError] = useState(null);
+  const [hoveredId, setHoveredId] = useState(null);
+  const [hoveredImageUrl, setHoveredImageUrl] = useState(null);
   const { id } = useParams();
   const location = useLocation();
 
@@ -38,6 +46,21 @@ export default function Person() {
 
   const toggleOrder = () => {
     setOrder(order === 'asc' ? 'desc' : 'asc');
+  };
+
+  const handleMouseEnter = (id, imageUrl) => {
+    setHoveredId(id);
+    const fetchUrl = basicSmallImageURL + imageUrl;
+
+    fetch(fetchUrl)
+      .then(response => response.blob())
+      .then(blob => URL.createObjectURL(blob))
+      .then(url => setHoveredImageUrl(url))
+      .catch(error => console.error(error));
+  };
+
+  const handleMouseLeave = () => {
+    setHoveredId(null);
   };
 
   const backLinkHref = location.state?.from ?? '/';
@@ -117,13 +140,23 @@ export default function Person() {
 
             <PersonList>
               {sortedFilmography.map(
-                ({ id, title, release_date, vote_average }) => (
+                ({ id, title, release_date, vote_average, backdrop_path }) => (
                   <LiDecor key={id}>
-                    <HiFilm />
-                    <Link to={`/movies/${id}`} state={{ from: location }}>
+                    <HiFilm style={{ padding: '4px 0 4px 0' }} />
+                    <Link
+                      style={{ padding: '4px' }}
+                      to={`/movies/${id}`}
+                      state={{ from: location }}
+                      onMouseEnter={() => handleMouseEnter(id, backdrop_path)}
+                      onMouseLeave={() => handleMouseLeave()}
+                    >
                       {title}, ({release_date?.slice(0, 4) || 'no data'}),{' '}
                       {voteToPersent(vote_average)}
                     </Link>
+
+                    {hoveredId === id && hoveredImageUrl && (
+                      <img src={hoveredImageUrl} alt={title} />
+                    )}
                   </LiDecor>
                 )
               )}
