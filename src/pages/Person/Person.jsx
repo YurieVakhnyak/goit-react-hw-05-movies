@@ -144,7 +144,7 @@ export default function Person() {
                   <LiDecor key={id}>
                     <HiFilm style={{ padding: '4px 0 4px 0' }} />
                     <Link
-                      style={{ padding: '4px' }}
+                      style={{ padding: '4px', position: 'relative' }}
                       to={`/movies/${id}`}
                       state={{ from: location }}
                       onMouseEnter={() => handleMouseEnter(id, backdrop_path)}
@@ -155,7 +155,15 @@ export default function Person() {
                     </Link>
 
                     {hoveredId === id && hoveredImageUrl && (
-                      <img src={hoveredImageUrl} alt={title} />
+                      <div
+                        style={{
+                          position: 'absolute',
+                          transform: 'translate(30%, -110%)',
+                          zIndex: '99',
+                        }}
+                      >
+                        <img src={hoveredImageUrl} alt={title} />
+                      </div>
                     )}
                   </LiDecor>
                 )
