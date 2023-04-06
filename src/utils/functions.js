@@ -3,7 +3,7 @@ export function voteToPersent(vote) {
     const persentVote = Math.floor(vote * 10);
     return `${persentVote}%`;
   }
-  return 'no data';
+  return '--%';
 }
 
 export function formateDate(date) {
@@ -66,3 +66,19 @@ export const getSortedFilmography = (fieldSorted, cast, order) => {
 
   return sortedFilmography;
 };
+
+export function removeDuplicates(arr) {
+  const uniqueArr = [];
+
+  arr.forEach(({ author, content }) => {
+    if (
+      !uniqueArr.find(
+        item => item.author === author && item.content === content
+      )
+    ) {
+      uniqueArr.push({ author, content });
+    }
+  });
+
+  return uniqueArr;
+}

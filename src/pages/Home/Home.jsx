@@ -8,10 +8,10 @@ import {
   Title,
   LiDecor,
   StyledLink,
+  StyledFilmIcon,
 } from './Home.styled';
 import { Modal } from 'components/Modal/Modal';
 import { Button } from 'components/BackLinkButton/BackLinkButton.styled';
-import { HiFilm } from 'react-icons/hi';
 
 export default function Home() {
   const [trending, setTrending] = useState(null);
@@ -47,7 +47,7 @@ export default function Home() {
           {trending.results.map(
             ({ id, title, release_date, overview, backdrop_path }) => (
               <LiDecor key={id}>
-                <HiFilm style={{ padding: '3px 0 3px 0' }} />
+                <StyledFilmIcon />
                 <StyledLink
                   to={`movies/${id}`}
                   state={{ from: location }}

@@ -17,7 +17,7 @@ import {
   formateDate,
   voteToPersent,
 } from 'utils/functions';
-import { HiFilm } from 'react-icons/hi';
+import { StyledFilmIcon } from 'pages/Home/Home.styled';
 import { fetchData, fetchImage } from 'utils/fetchData';
 import { searchParams, basicURL, basicBigImageURL } from 'utils/constants';
 import { SortButtons } from 'components/SortButtons/SortButtons';
@@ -112,7 +112,7 @@ export default function Person() {
                   overview,
                 }) => (
                   <LiDecor key={id}>
-                    <HiFilm style={{ padding: '4px 0 4px 0' }} />
+                    <StyledFilmIcon />
                     <StyledLink
                       to={`/movies/${id}`}
                       state={{ from: location }}

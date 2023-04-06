@@ -1,9 +1,10 @@
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { Text } from 'components/MovieCast/MovieCast.styled';
-import { ReviewTitle } from './MovieReviews.styled';
+import { ReviewTitle, TextReview } from './MovieReviews.styled';
 import { fetchData } from 'utils/fetchData';
+import { removeDuplicates } from 'utils/functions';
 import { searchParams, basicURL } from 'utils/constants';
+import { nanoid } from 'nanoid';
 
 export default function MovieReviews() {
   const [movieReviews, setMovieReviews] = useState(null);
@@ -17,18 +18,20 @@ export default function MovieReviews() {
 
   if (movieReviews) {
     const { results } = movieReviews;
-    if (results.length > 0) {
+    const uniqueResults = removeDuplicates(results);
+
+    if (uniqueResults.length > 0) {
       return (
-        <main>
+        <div>
           <ul>
-            {results.map(({ author, content }) => (
-              <li key={author}>
+            {uniqueResults.map(({ author, content }) => (
+              <li key={nanoid()}>
                 <ReviewTitle>{author}</ReviewTitle>
-                <Text>{content}</Text>
+                <TextReview>{content}</TextReview>
               </li>
             ))}
           </ul>
-        </main>
+        </div>
       );
     } else {
       return (

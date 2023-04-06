@@ -1,7 +1,7 @@
 import { Container, LiDecor, StyledLink } from 'pages/Home/Home.styled';
 import { useSearchParams, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { HiFilm } from 'react-icons/hi';
+import { StyledFilmIcon } from 'pages/Home/Home.styled';
 import { Modal } from 'components/Modal/Modal';
 import { SearchBar } from '../../components/SearchBar/SearchBar';
 import { fetchData, fetchImage } from 'utils/fetchData';
@@ -51,7 +51,7 @@ const Movies = () => {
           {sortedMovies.map(
             ({ id, title, release_date, backdrop_path, overview }) => (
               <LiDecor key={id}>
-                <HiFilm style={{ padding: '4px 0 4px 0' }} />
+                <StyledFilmIcon />
                 <StyledLink
                   to={`${id}`}
                   state={{ from: location }}

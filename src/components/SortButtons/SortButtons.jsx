@@ -1,4 +1,5 @@
-import { FaSortAmountDown, FaSortAmountUpAlt } from 'react-icons/fa';
+import { FaLongArrowAltDown, FaLongArrowAltUp } from 'react-icons/fa';
+
 import { Button } from 'components/BackLinkButton/BackLinkButton.styled';
 import { SortBox } from 'pages/Person/Person.styled';
 export function SortButtons({
@@ -21,7 +22,7 @@ export function SortButtons({
       >
         Rating
         {fieldSorted === 'Rating' &&
-          (order ? <FaSortAmountUpAlt /> : <FaSortAmountDown />)}
+          (order ? <FaLongArrowAltUp /> : <FaLongArrowAltDown />)}
       </Button>
       <Button
         className={buttonClass('Date')}
@@ -32,7 +33,7 @@ export function SortButtons({
       >
         Date
         {fieldSorted === 'Date' &&
-          (order ? <FaSortAmountUpAlt /> : <FaSortAmountDown />)}
+          (order ? <FaLongArrowAltUp /> : <FaLongArrowAltDown />)}
       </Button>
       <Button
         className={buttonClass('Title')}
@@ -43,7 +44,7 @@ export function SortButtons({
       >
         Title
         {fieldSorted === 'Title' &&
-          (order ? <FaSortAmountDown /> : <FaSortAmountUpAlt />)}
+          (order ? <FaLongArrowAltDown /> : <FaLongArrowAltUp />)}
       </Button>
     </SortBox>
   );

@@ -167,3 +167,11 @@ input:focus {
   outline: none;
   border: 2px solid darkblue;
 }
+
+button:active {
+  background-color: rgb(32 170 170);
+}
+
+button:focus {
+  color: rgb(0 0 140);
+}

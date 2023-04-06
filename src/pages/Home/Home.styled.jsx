@@ -1,13 +1,14 @@
 import styled from 'styled-components';
+import { HiFilm } from 'react-icons/hi';
 import { Link } from 'react-router-dom';
 
 export const StyledLink = styled(Link)`
-  padding: 3px;
+  padding: 5px;
   position: relative;
-
-  &:hover {
-    // styles for hover state
-  }
+`;
+export const StyledFilmIcon = styled(HiFilm)`
+  padding: 5px 0 5px 0;
+  // color: darkblue;
 `;
 
 export const Container = styled.main`
