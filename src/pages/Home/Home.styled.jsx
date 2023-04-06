@@ -1,4 +1,14 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+
+export const StyledLink = styled(Link)`
+  padding: 3px;
+  position: relative;
+
+  &:hover {
+    // styles for hover state
+  }
+`;
 
 export const Container = styled.main`
   padding-left: 20px;

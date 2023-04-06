@@ -1,16 +1,34 @@
 import { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { fetchData } from 'utils/fetchData';
+import { useLocation } from 'react-router-dom';
+import { fetchData, fetchImage } from 'utils/fetchData';
 import { searchParams, basicURL } from 'utils/constants';
-import { Container, ButtonsThumb, Title, LiDecor } from './Home.styled';
+import {
+  Container,
+  ButtonsThumb,
+  Title,
+  LiDecor,
+  StyledLink,
+} from './Home.styled';
+import { Modal } from 'components/Modal/Modal';
 import { Button } from 'components/BackLinkButton/BackLinkButton.styled';
 import { HiFilm } from 'react-icons/hi';
 
 export default function Home() {
   const [trending, setTrending] = useState(null);
   const [period, setPeriod] = useState('day');
+  const [hoveredId, setHoveredId] = useState(null);
+  const [hoveredImageUrl, setHoveredImageUrl] = useState(null);
   const [error, setError] = useState(null);
   const location = useLocation();
+
+  const handleMouseEnter = (id, imageUrl) => {
+    setHoveredId(id);
+    fetchImage(imageUrl, setHoveredImageUrl);
+  };
+
+  const handleMouseLeave = () => {
+    setHoveredId(null);
+  };
 
   useEffect(() => {
     const URL = `${basicURL}/trending/movie/${period}?${searchParams}`;
@@ -26,14 +44,28 @@ export default function Home() {
           <Button onClick={() => setPeriod('week')}>Week</Button>
         </ButtonsThumb>
         <ul>
-          {trending.results.map(({ id, title, release_date }) => (
-            <LiDecor key={id}>
-              <HiFilm />
-              <Link to={`movies/${id}`} state={{ from: location }}>
-                {title} ({release_date.slice(0, 4)})
-              </Link>
-            </LiDecor>
-          ))}
+          {trending.results.map(
+            ({ id, title, release_date, overview, backdrop_path }) => (
+              <LiDecor key={id}>
+                <HiFilm style={{ padding: '3px 0 3px 0' }} />
+                <StyledLink
+                  to={`movies/${id}`}
+                  state={{ from: location }}
+                  onMouseEnter={() => handleMouseEnter(id, backdrop_path)}
+                  onMouseLeave={() => handleMouseLeave()}
+                >
+                  {title} ({release_date.slice(0, 4)})
+                </StyledLink>
+                {hoveredId === id && hoveredImageUrl && (
+                  <Modal
+                    hoveredImageUrl={hoveredImageUrl}
+                    title={title}
+                    overview={overview}
+                  />
+                )}
+              </LiDecor>
+            )
+          )}
         </ul>
       </Container>
     );

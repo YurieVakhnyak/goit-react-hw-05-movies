@@ -1,9 +1,9 @@
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { Modal } from 'components/Modal/Modal';
 import { BackLinkButton } from 'components/BackLinkButton/BackLinkButton';
-import { Container, LiDecor, Title } from 'pages/Home/Home.styled';
+import { Container, LiDecor, Title, StyledLink } from 'pages/Home/Home.styled';
 import { MediumTitle } from 'pages/MoviesDetails/MoviesDetails.styled';
 import {
   PersonContainer,
@@ -113,8 +113,7 @@ export default function Person() {
                 }) => (
                   <LiDecor key={id}>
                     <HiFilm style={{ padding: '4px 0 4px 0' }} />
-                    <Link
-                      style={{ padding: '4px', position: 'relative' }}
+                    <StyledLink
                       to={`/movies/${id}`}
                       state={{ from: location }}
                       onMouseEnter={() => handleMouseEnter(id, backdrop_path)}
@@ -122,7 +121,7 @@ export default function Person() {
                     >
                       {title}, ({release_date?.slice(0, 4) || 'no data'}),{' '}
                       {voteToPersent(vote_average)}
-                    </Link>
+                    </StyledLink>
 
                     {hoveredId === id && hoveredImageUrl && (
                       <Modal
