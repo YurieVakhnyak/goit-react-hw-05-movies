@@ -15,8 +15,8 @@ export function formateDate(date) {
   return 'no data';
 }
 
-export function sortByField(arr, field, order = 'desc') {
-  const direction = order === 'asc' ? 1 : -1;
+export function sortByField(arr, field, order = false) {
+  const direction = order ? 1 : -1;
   return arr.sort((a, b) => {
     if (a[field] < b[field]) {
       return -1 * direction;
@@ -40,5 +40,29 @@ export function makeWithoutLowVotes(arr) {
 }
 
 export function toggleOrder(order) {
-  return order === 'asc' ? 'desc' : 'asc';
+  return !order;
 }
+
+export const getSortedFilmography = (fieldSorted, cast, order) => {
+  let sortedFilmography;
+
+  switch (fieldSorted) {
+    case 'Rating':
+      const withoutLowVotes = makeWithoutLowVotes(cast);
+
+      sortedFilmography = sortByField(withoutLowVotes, 'vote_average', order);
+
+      break;
+    case 'Date':
+      sortedFilmography = sortByField(cast, 'release_date', order);
+      break;
+    case 'Title':
+      sortedFilmography = sortByField(cast, 'title', order);
+
+      break;
+    default:
+      sortedFilmography = cast;
+  }
+
+  return sortedFilmography;
+};

@@ -1,3 +1,5 @@
+import { basicSmallImageURL } from './constants';
+
 export function fetchData(url, setData, setError) {
   fetch(url)
     .then(response => {
@@ -12,4 +14,14 @@ export function fetchData(url, setData, setError) {
     .catch(error => {
       setError(error);
     });
+}
+
+export function fetchImage(imageUrl, setHoveredImageUrl) {
+  const fetchUrl = basicSmallImageURL + imageUrl;
+
+  fetch(fetchUrl)
+    .then(response => response.blob())
+    .then(blob => URL.createObjectURL(blob))
+    .then(url => setHoveredImageUrl(url))
+    .catch(error => console.error(error));
 }
