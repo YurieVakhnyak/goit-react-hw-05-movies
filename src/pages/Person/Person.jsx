@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { Modal } from 'components/Modal/Modal';
 import { BackLinkButton } from 'components/BackLinkButton/BackLinkButton';
 import { Container, LiDecor, Title } from 'pages/Home/Home.styled';
 import { MediumTitle } from 'pages/MoviesDetails/MoviesDetails.styled';
@@ -19,8 +20,8 @@ import {
 import { HiFilm } from 'react-icons/hi';
 import { fetchData, fetchImage } from 'utils/fetchData';
 import { searchParams, basicURL, basicBigImageURL } from 'utils/constants';
-import hasNotPhotoImage from '../../components/MovieCast/NoPhoto.png';
 import { SortButtons } from 'components/SortButtons/SortButtons';
+import hasNotPhotoImage from '../../images/NoPhoto.png';
 
 export default function Person() {
   const [person, setPerson] = useState(null);
@@ -102,7 +103,14 @@ export default function Person() {
 
             <PersonList>
               {sortedFilmography.map(
-                ({ id, title, release_date, vote_average, backdrop_path }) => (
+                ({
+                  id,
+                  title,
+                  release_date,
+                  vote_average,
+                  backdrop_path,
+                  overview,
+                }) => (
                   <LiDecor key={id}>
                     <HiFilm style={{ padding: '4px 0 4px 0' }} />
                     <Link
@@ -117,15 +125,11 @@ export default function Person() {
                     </Link>
 
                     {hoveredId === id && hoveredImageUrl && (
-                      <div
-                        style={{
-                          position: 'absolute',
-                          transform: 'translate(30%, -110%)',
-                          zIndex: '99',
-                        }}
-                      >
-                        <img src={hoveredImageUrl} alt={title} />
-                      </div>
+                      <Modal
+                        hoveredImageUrl={hoveredImageUrl}
+                        title={title}
+                        overview={overview}
+                      />
                     )}
                   </LiDecor>
                 )

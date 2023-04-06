@@ -16,7 +16,7 @@ import {
   InfoBox,
   MoreInfoBox,
 } from './MoviesDetails.styled';
-import hasNotPosterImage from './NoFilmImage.png';
+import hasNotPosterImage from '../../images/NoFilmImage.png';
 
 export default function MoviesDetails() {
   const [movie, setMovie] = useState(null);

@@ -21,8 +21,8 @@ export const PersonList = styled.div`
 export const PersonBox = styled.div`
   max-width: 450px;
   min-width: 300px;
-  @media (min-width: 750px) {
-    padding-top: 50px;
+  @media (min-width: 900px) {
+    padding-top: 80px;
   }
 `;
 export const ButtonBox = styled.div`

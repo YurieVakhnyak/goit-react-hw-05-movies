@@ -6,6 +6,7 @@ export const Button = styled.button`
   justify-content: center;
   align-items: center;
   min-width: 90px;
+  height: 23px;
   background-color: lightseagreen;
   border-radius: 5px;
   border-color: lightseagreen;

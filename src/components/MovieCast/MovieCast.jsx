@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { Text, Card, CastList, Image } from './MovieCast.styled';
 import { fetchData } from 'utils/fetchData';
 import { searchParams, basicURL, basicSmallImageURL } from 'utils/constants';
-import hasNotPhotoImage from './NoPhoto.png';
+import hasNotPhotoImage from '../../images/NoPhoto.png';
 
 export default function MovieCast() {
   const [movieCast, setMovieCast] = useState(null);
