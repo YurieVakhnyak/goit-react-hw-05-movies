@@ -1,9 +1,9 @@
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import { Modal } from 'components/Modal/Modal';
+import { MovieItem } from 'components/MovieItem/MovieItem';
 import { BackLinkButton } from 'components/BackLinkButton/BackLinkButton';
-import { Container, LiDecor, Title, StyledLink } from 'pages/Home/Home.styled';
+import { Container, Title } from 'pages/Home/Home.styled';
 import { MediumTitle } from 'pages/MoviesDetails/MoviesDetails.styled';
 import {
   PersonContainer,
@@ -12,16 +12,10 @@ import {
   PersonList,
   ButtonBox,
 } from './Person.styled';
-import {
-  getSortedFilmography,
-  formateDate,
-  voteToPersent,
-} from 'utils/functions';
-import { StyledFilmIcon } from 'pages/Home/Home.styled';
-import { fetchData, fetchImage } from 'utils/fetchData';
-import { searchParams, basicURL, basicBigImageURL } from 'utils/constants';
+import { fetchData, getImageUrl } from 'utils/fetchData';
+import { getSortedFilmography, formateDate } from 'utils/functions';
+import { searchParams, basicURL } from 'utils/constants';
 import { SortButtons } from 'components/SortButtons/SortButtons';
-import hasNotPhotoImage from '../../images/NoPhoto.png';
 
 export default function Person() {
   const [person, setPerson] = useState(null);
@@ -36,15 +30,6 @@ export default function Person() {
 
   const toggleOrder = () => {
     setOrder(order ? false : true);
-  };
-
-  const handleMouseEnter = (id, imageUrl) => {
-    setHoveredId(id);
-    fetchImage(imageUrl, setHoveredImageUrl);
-  };
-
-  const handleMouseLeave = () => {
-    setHoveredId(null);
   };
 
   const backLinkHref = location.state?.from ?? '/';
@@ -73,15 +58,7 @@ export default function Person() {
         </ButtonBox>
         <PersonContainer>
           <PersonBox>
-            <img
-              src={
-                profile_path
-                  ? basicBigImageURL + profile_path
-                  : hasNotPhotoImage
-              }
-              alt={name}
-              height={281}
-            />
+            <img src={getImageUrl(profile_path)} alt={name} height={281} />
             {<Title>{name}</Title>}
             <MediumTitle>
               {deathday
@@ -96,43 +73,21 @@ export default function Person() {
               fieldSorted={fieldSorted}
               order={order}
             />
-
             <MediumTitle style={{ textAlign: 'center', marginBottom: '20px' }}>
               Filmography
             </MediumTitle>
-
             <PersonList>
-              {sortedFilmography.map(
-                ({
-                  id,
-                  title,
-                  release_date,
-                  vote_average,
-                  backdrop_path,
-                  overview,
-                }) => (
-                  <LiDecor key={id}>
-                    <StyledFilmIcon />
-                    <StyledLink
-                      to={`/movies/${id}`}
-                      state={{ from: location }}
-                      onMouseEnter={() => handleMouseEnter(id, backdrop_path)}
-                      onMouseLeave={() => handleMouseLeave()}
-                    >
-                      {title}, ({release_date?.slice(0, 4) || 'no data'}),{' '}
-                      {voteToPersent(vote_average)}
-                    </StyledLink>
-
-                    {hoveredId === id && hoveredImageUrl && (
-                      <Modal
-                        hoveredImageUrl={hoveredImageUrl}
-                        title={title}
-                        overview={overview}
-                      />
-                    )}
-                  </LiDecor>
-                )
-              )}
+              {sortedFilmography.map(movie => (
+                <MovieItem
+                  key={movie.id}
+                  movie={movie}
+                  hoveredId={hoveredId}
+                  setHoveredId={setHoveredId}
+                  hoveredImageUrl={hoveredImageUrl}
+                  setHoveredImageUrl={setHoveredImageUrl}
+                  location={location}
+                />
+              ))}
             </PersonList>
           </FilmBox>
         </PersonContainer>

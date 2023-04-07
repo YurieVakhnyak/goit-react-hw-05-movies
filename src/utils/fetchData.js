@@ -1,4 +1,5 @@
-import { basicSmallImageURL } from './constants';
+import { basicSmallImageURL, basicBigImageURL } from './constants';
+import hasNotPhotoPerson from '../images/NoPhotoPerson.png';
 
 export function fetchData(url, setData, setError) {
   fetch(url)
@@ -24,4 +25,14 @@ export function fetchImage(imageUrl, setHoveredImageUrl) {
     .then(blob => URL.createObjectURL(blob))
     .then(url => setHoveredImageUrl(url))
     .catch(error => console.error(error));
+}
+
+export function getImageUrl(profilePath, small = false) {
+  if (profilePath) {
+    return small
+      ? basicSmallImageURL + profilePath
+      : basicBigImageURL + profilePath;
+  } else {
+    return hasNotPhotoPerson;
+  }
 }

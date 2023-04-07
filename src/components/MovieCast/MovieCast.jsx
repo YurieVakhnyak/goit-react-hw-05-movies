@@ -1,9 +1,8 @@
 import { useParams, Link, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { Text, Card, CastList, Image } from './MovieCast.styled';
-import { fetchData } from 'utils/fetchData';
-import { searchParams, basicURL, basicSmallImageURL } from 'utils/constants';
-import hasNotPhotoImage from '../../images/NoPhoto.png';
+import { fetchData, getImageUrl } from 'utils/fetchData';
+import { searchParams, basicURL } from 'utils/constants';
 
 export default function MovieCast() {
   const [movieCast, setMovieCast] = useState(null);
@@ -27,14 +26,7 @@ export default function MovieCast() {
             <li key={id}>
               <Link to={`/person/${id}`} state={{ from: location }}>
                 <Card>
-                  <Image
-                    src={
-                      profile_path
-                        ? basicSmallImageURL + profile_path
-                        : hasNotPhotoImage
-                    }
-                    alt={name}
-                  />
+                  <Image src={getImageUrl(profile_path, true)} alt={name} />
                   <p>{name}</p>
                   <Text>
                     Character: {character !== '' ? character : 'No results'}

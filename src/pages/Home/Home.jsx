@@ -1,17 +1,11 @@
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import { fetchData, fetchImage } from 'utils/fetchData';
+import { fetchData } from 'utils/fetchData';
+
+import { PeriodButtons } from 'components/PeriodButtons/PeriodButtons';
 import { searchParams, basicURL } from 'utils/constants';
-import {
-  Container,
-  ButtonsThumb,
-  Title,
-  LiDecor,
-  StyledLink,
-  StyledFilmIcon,
-} from './Home.styled';
-import { Modal } from 'components/Modal/Modal';
-import { Button } from 'components/BackLinkButton/BackLinkButton.styled';
+import { Container, Title } from './Home.styled';
+import { MovieItem } from 'components/MovieItem/MovieItem';
 
 export default function Home() {
   const [trending, setTrending] = useState(null);
@@ -21,15 +15,6 @@ export default function Home() {
   const [error, setError] = useState(null);
   const location = useLocation();
 
-  const handleMouseEnter = (id, imageUrl) => {
-    setHoveredId(id);
-    fetchImage(imageUrl, setHoveredImageUrl);
-  };
-
-  const handleMouseLeave = () => {
-    setHoveredId(null);
-  };
-
   useEffect(() => {
     const URL = `${basicURL}/trending/movie/${period}?${searchParams}`;
     fetchData(URL, setTrending, setError);
@@ -38,34 +23,20 @@ export default function Home() {
   if (trending) {
     return (
       <Container>
+        <PeriodButtons setPeriod={setPeriod} />
         <Title>{period === 'week' ? 'Trending week' : 'Trending today'}</Title>
-        <ButtonsThumb>
-          <Button onClick={() => setPeriod('day')}>Day</Button>
-          <Button onClick={() => setPeriod('week')}>Week</Button>
-        </ButtonsThumb>
         <ul>
-          {trending.results.map(
-            ({ id, title, release_date, overview, backdrop_path }) => (
-              <LiDecor key={id}>
-                <StyledFilmIcon />
-                <StyledLink
-                  to={`movies/${id}`}
-                  state={{ from: location }}
-                  onMouseEnter={() => handleMouseEnter(id, backdrop_path)}
-                  onMouseLeave={() => handleMouseLeave()}
-                >
-                  {title} ({release_date.slice(0, 4)})
-                </StyledLink>
-                {hoveredId === id && hoveredImageUrl && (
-                  <Modal
-                    hoveredImageUrl={hoveredImageUrl}
-                    title={title}
-                    overview={overview}
-                  />
-                )}
-              </LiDecor>
-            )
-          )}
+          {trending.results.map(movie => (
+            <MovieItem
+              key={movie.id}
+              movie={movie}
+              hoveredId={hoveredId}
+              setHoveredId={setHoveredId}
+              hoveredImageUrl={hoveredImageUrl}
+              setHoveredImageUrl={setHoveredImageUrl}
+              location={location}
+            />
+          ))}
         </ul>
       </Container>
     );
