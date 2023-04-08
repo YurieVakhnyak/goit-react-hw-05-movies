@@ -1,5 +1,4 @@
-import { Button } from 'components/BackLinkButton/BackLinkButton.styled';
-import { ButtonsThumb } from './PeriodButtons.styled';
+import { ButtonsThumb, ButtonsChanged } from './PeriodButtons.styled';
 
 export const PeriodButtons = ({ setPeriod, period }) => {
   const togglePeriod = () => {
@@ -7,9 +6,7 @@ export const PeriodButtons = ({ setPeriod, period }) => {
   };
   return (
     <ButtonsThumb>
-      <Button onClick={togglePeriod}>
-        {period === 'week' ? 'Week' : 'Day'}
-      </Button>
+      <ButtonsChanged onClick={togglePeriod}>Change timeframe</ButtonsChanged>
     </ButtonsThumb>
   );
 };

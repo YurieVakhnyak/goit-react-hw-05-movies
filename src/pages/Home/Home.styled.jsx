@@ -7,9 +7,11 @@ export const Container = styled.main`
 `;
 export const TitleBox = styled.main`
   display: flex;
+  justify-content: space-around;
+  max-width: 500px;
+  padding: 5px 0 5px 0;
 `;
 
 export const Title = styled.h1`
-  padding-bottom: 10px;
   font-size: xx-large;
 `;
