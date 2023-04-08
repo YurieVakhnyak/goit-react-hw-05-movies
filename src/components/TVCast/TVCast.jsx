@@ -1,9 +1,14 @@
 import { useParams, Link, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { Text, Card, CastList, Image } from './MovieCast.styled';
+import {
+  Text,
+  Card,
+  CastList,
+  Image,
+} from 'components/MovieCast/MovieCast.styled';
 import { fetchData, getImageUrl, getExtraInfoUrl } from 'utils/fetchData';
 
-export default function MovieCast() {
+export default function TVCast() {
   const [movieCast, setMovieCast] = useState(null);
   const [error, setError] = useState(null);
   const { id } = useParams();
@@ -11,7 +16,7 @@ export default function MovieCast() {
   console.log('movieCast:', location);
 
   useEffect(() => {
-    const URL = getExtraInfoUrl(id, 'movie', 'cast');
+    const URL = getExtraInfoUrl(id, 'tv', 'cast');
     fetchData(URL, setMovieCast, setError);
   }, [id]);
 

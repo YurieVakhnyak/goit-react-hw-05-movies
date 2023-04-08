@@ -5,7 +5,7 @@ import { fetchData } from 'utils/fetchData';
 import { getSortedFilmography } from 'utils/functions';
 import { SortButtons } from 'components/SortButtons/SortButtons';
 import { PeriodButtons } from 'components/PeriodButtons/PeriodButtons';
-import { Container, Title } from './Home.styled';
+import { Container, Title, TitleBox } from './Home.styled';
 import { MovieItem } from 'components/MovieItem/MovieItem';
 
 export default function Home() {
@@ -39,8 +39,15 @@ export default function Home() {
           fieldSorted={fieldSorted}
           order={order}
         />
-        <PeriodButtons setPeriod={setPeriod} />
-        <Title>{period === 'week' ? 'Trending week' : 'Trending today'}</Title>
+        <TitleBox>
+          <Title>
+            {period === 'week'
+              ? 'Movies trending week'
+              : 'Movies trending today'}
+          </Title>
+
+          <PeriodButtons setPeriod={setPeriod} period={period} />
+        </TitleBox>
         <ul>
           {sortedFilmography.map(movie => (
             <MovieItem

@@ -1,17 +1,20 @@
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { ReviewTitle, TextReview } from './MovieReviews.styled';
+import {
+  ReviewTitle,
+  TextReview,
+} from 'components/MovieReviews/MovieReviews.styled';
 import { fetchData, getExtraInfoUrl } from 'utils/fetchData';
 import { removeDuplicates } from 'utils/functions';
 import { nanoid } from 'nanoid';
 
-export default function MovieReviews() {
+export default function TVReviews() {
   const [movieReviews, setMovieReviews] = useState(null);
   const [error, setError] = useState(null);
   const { id } = useParams();
 
   useEffect(() => {
-    const URL = getExtraInfoUrl(id, 'movie', 'reviews');
+    const URL = getExtraInfoUrl(id, 'tv', 'reviews');
     fetchData(URL, setMovieReviews, setError);
   }, [id]);
 

@@ -15,9 +15,9 @@ import {
   Thumb,
   InfoBox,
   MoreInfoBox,
-} from './MoviesDetails.styled';
+} from '../MoviesDetails/MoviesDetails.styled';
 
-export default function MoviesDetails() {
+export default function TVShowsDetails() {
   const [movie, setMovie] = useState(null);
   const [error, setError] = useState(null);
   const { id } = useParams();
@@ -26,15 +26,18 @@ export default function MoviesDetails() {
   const backLinkHref = location.state?.from ?? '/';
 
   useEffect(() => {
-    const URL = `${basicURL}/movie/${id}?${searchParams}`;
+    const URL = `${basicURL}/tv/${id}?${searchParams}`;
     fetchData(URL, setMovie, setError);
   }, [id]);
 
   if (movie) {
+    console.log(movie);
+
     const {
       backdrop_path,
       title,
-      release_date,
+      first_air_date,
+      last_air_date,
       vote_average,
       overview,
       genres,
@@ -50,7 +53,8 @@ export default function MoviesDetails() {
           <InfoBox>
             <Title>{title}</Title>
             <p>User score: {voteToPersent(vote_average)}</p>
-            <p>Release date: {formateDate(release_date)}</p>
+            <p>First air date: {formateDate(first_air_date)}</p>
+            <p>Last air date: {formateDate(last_air_date)}</p>
             <MediumTitle>Overview</MediumTitle>
             <p>{overview}</p>
             <MediumTitle>Genres</MediumTitle>
@@ -64,10 +68,10 @@ export default function MoviesDetails() {
         <MoreInfoBox>
           <MediumTitle>Additionals information</MediumTitle>
           <Thumb>
-            <Link to="get-movie-credits" state={{ from: location.state?.from }}>
+            <Link to="get-tv-credits" state={{ from: location.state?.from }}>
               Cast
             </Link>
-            <Link to="get-movie-reviews" state={{ from: location.state?.from }}>
+            <Link to="get-tv-reviews" state={{ from: location.state?.from }}>
               Reviews
             </Link>
           </Thumb>

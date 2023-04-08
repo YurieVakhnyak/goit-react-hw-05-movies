@@ -30,7 +30,7 @@ export const TVShowsItem = ({
     <LiDecor key={id}>
       <StyledFilmIcon />
       <StyledLink
-        to={`/tv/${id}`}
+        to={`/tv-shows/${id}`}
         state={{ from: location }}
         onMouseEnter={() => handleMouseEnter(id, backdrop_path)}
         onMouseLeave={() => handleMouseLeave()}

@@ -1,4 +1,9 @@
-import { basicSmallImageURL, basicBigImageURL } from './constants';
+import {
+  searchParams,
+  basicURL,
+  basicSmallImageURL,
+  basicBigImageURL,
+} from './constants';
 import hasNotPhotoPerson from '../images/NoPhotoPerson.png';
 
 export function fetchData(url, setData, setError) {
@@ -35,4 +40,11 @@ export function getImageUrl(profilePath, small = false) {
   } else {
     return hasNotPhotoPerson;
   }
+}
+
+export function getExtraInfoUrl(id, type, dataType) {
+  const mediaType = type === 'tv' ? 'tv' : 'movie';
+  const dataAltType = dataType === 'cast' ? 'credits' : 'reviews';
+  const URL = `${basicURL}/${mediaType}/${id}/${dataAltType}?${searchParams}`;
+  return URL;
 }

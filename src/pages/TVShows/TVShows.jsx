@@ -42,7 +42,11 @@ export default function TVShows() {
           order={order}
         />
         <PeriodButtons setPeriod={setPeriod} />
-        <Title>{period === 'week' ? 'Trending week' : 'Trending today'}</Title>
+        <Title>
+          {period === 'week'
+            ? 'TV shows trending week'
+            : 'TV shows trending today'}
+        </Title>
         <ul>
           {sortedFilmography.map(movie => (
             <TVShowsItem
