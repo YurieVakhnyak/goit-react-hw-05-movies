@@ -30,7 +30,7 @@ export const ButtonBox = styled.div`
 `;
 export const SortBox = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: left;
   gap: 5px;
 `;
 export const FilmBox = styled.div`

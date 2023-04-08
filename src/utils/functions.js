@@ -28,6 +28,17 @@ export function sortByField(arr, field, order = false) {
   });
 }
 
+export function makeNewArray(arr) {
+  const newArr = arr.map(item => {
+    if (item !== null) {
+      return { ...item };
+    } else {
+      return item;
+    }
+  });
+  return newArr;
+}
+
 export function makeWithoutLowVotes(arr) {
   const newArr = arr.map(item => {
     if (item.vote_count < 10) {
@@ -47,19 +58,22 @@ export const getSortedFilmography = (fieldSorted, cast, order) => {
   let sortedFilmography;
 
   switch (fieldSorted) {
+    case 'Trends':
+      sortedFilmography = cast;
+      break;
     case 'Rating':
       const withoutLowVotes = makeWithoutLowVotes(cast);
-
       sortedFilmography = sortByField(withoutLowVotes, 'vote_average', order);
-
       break;
     case 'Date':
-      sortedFilmography = sortByField(cast, 'release_date', order);
+      const newArrayByDate = makeNewArray(cast);
+      sortedFilmography = sortByField(newArrayByDate, 'release_date', order);
       break;
     case 'Title':
-      sortedFilmography = sortByField(cast, 'title', order);
-
+      const newArrayByTitle = makeNewArray(cast);
+      sortedFilmography = sortByField(newArrayByTitle, 'title', order);
       break;
+
     default:
       sortedFilmography = cast;
   }

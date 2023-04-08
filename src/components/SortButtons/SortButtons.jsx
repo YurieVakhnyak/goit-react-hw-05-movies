@@ -12,7 +12,15 @@ export function SortButtons({
 
   return (
     <SortBox>
-      <p style={{ marginRight: '10px' }}>Sort by:</p>
+      {/* <p style={{ marginRight: '10px' }}>Sort by:</p> */}
+      <Button
+        className={buttonClass('Trends')}
+        onClick={() => {
+          setFieldSorted('Trends');
+        }}
+      >
+        Trends
+      </Button>
       <Button
         className={buttonClass('Rating')}
         onClick={() => {
@@ -24,6 +32,7 @@ export function SortButtons({
         {fieldSorted === 'Rating' &&
           (order ? <FaLongArrowAltUp /> : <FaLongArrowAltDown />)}
       </Button>
+
       <Button
         className={buttonClass('Date')}
         onClick={() => {

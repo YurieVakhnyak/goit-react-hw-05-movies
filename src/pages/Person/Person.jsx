@@ -45,11 +45,11 @@ export default function Person() {
 
   if (personMoovies && person) {
     const { cast } = personMoovies;
+    const sortedFilmography = getSortedFilmography(fieldSorted, cast, order);
     const { name, profile_path, birthday, deathday } = person;
 
     const formattedBirthday = formateDate(birthday);
     const formattedDeathday = formateDate(deathday);
-    const sortedFilmography = getSortedFilmography(fieldSorted, cast, order);
 
     return (
       <div>
