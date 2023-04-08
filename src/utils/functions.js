@@ -96,3 +96,9 @@ export function removeDuplicates(arr) {
 
   return uniqueArr;
 }
+
+export const getTrendingTitle = (period, type) => {
+  const mediaType = type === 'tv' ? 'TV Shows' : 'Movies';
+  const timePeriod = period === 'week' ? 'week' : 'today';
+  return `${mediaType} trending ${timePeriod}`;
+};

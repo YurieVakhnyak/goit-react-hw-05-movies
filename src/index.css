@@ -174,4 +174,5 @@ button:active {
 
 button:focus {
   color: rgb(0 0 140);
+  /* align-items:baseline; */
 }

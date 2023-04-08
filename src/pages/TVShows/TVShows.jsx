@@ -1,12 +1,11 @@
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import { searchParams, basicURL } from 'utils/constants';
-import { fetchData } from 'utils/fetchData';
+import { fetchData, getTrendsUrl } from 'utils/fetchData';
 import { getSortedFilmography } from 'utils/functions';
 import { SortButtons } from 'components/SortButtons/SortButtons';
-import { PeriodButtons } from 'components/PeriodButtons/PeriodButtons';
-import { Container, Title } from 'pages/Home/Home.styled';
+import { Container } from 'pages/Home/Home.styled';
 import { TVShowsItem } from 'components/TVShowsItem/TVShowsItem';
+import { TrendingTitle } from 'components/TrendingTitle/TrendingTitle';
 
 export default function TVShows() {
   const [trending, setTrending] = useState(null);
@@ -23,7 +22,7 @@ export default function TVShows() {
   };
 
   useEffect(() => {
-    const URL = `${basicURL}/trending/tv/${period}?${searchParams}`;
+    const URL = getTrendsUrl('tv', period);
     fetchData(URL, setTrending, setError);
   }, [period]);
 
@@ -41,12 +40,7 @@ export default function TVShows() {
           fieldSorted={fieldSorted}
           order={order}
         />
-        <PeriodButtons setPeriod={setPeriod} />
-        <Title>
-          {period === 'week'
-            ? 'TV shows trending week'
-            : 'TV shows trending today'}
-        </Title>
+        <TrendingTitle setPeriod={setPeriod} period={period} type={'tv'} />
         <ul>
           {sortedFilmography.map(movie => (
             <TVShowsItem

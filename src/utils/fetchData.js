@@ -48,3 +48,8 @@ export function getExtraInfoUrl(id, type, dataType) {
   const URL = `${basicURL}/${mediaType}/${id}/${dataAltType}?${searchParams}`;
   return URL;
 }
+export function getTrendsUrl(type, period) {
+  const mediaType = type === 'tv' ? 'tv' : 'movie';
+  const URL = `${basicURL}/trending/${mediaType}/${period}?${searchParams}`;
+  return URL;
+}

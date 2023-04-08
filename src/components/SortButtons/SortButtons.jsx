@@ -12,7 +12,6 @@ export function SortButtons({
 
   return (
     <SortBox>
-      {/* <p style={{ marginRight: '10px' }}>Sort by:</p> */}
       <Button
         className={buttonClass('Trends')}
         onClick={() => {

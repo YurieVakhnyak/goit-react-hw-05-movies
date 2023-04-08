@@ -1,12 +1,11 @@
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import { searchParams, basicURL } from 'utils/constants';
-import { fetchData } from 'utils/fetchData';
+import { fetchData, getTrendsUrl } from 'utils/fetchData';
 import { getSortedFilmography } from 'utils/functions';
 import { SortButtons } from 'components/SortButtons/SortButtons';
-import { PeriodButtons } from 'components/PeriodButtons/PeriodButtons';
-import { Container, Title, TitleBox } from './Home.styled';
+import { Container } from './Home.styled';
 import { MovieItem } from 'components/MovieItem/MovieItem';
+import { TrendingTitle } from 'components/TrendingTitle/TrendingTitle';
 
 export default function Home() {
   const [trending, setTrending] = useState(null);
@@ -23,7 +22,7 @@ export default function Home() {
   };
 
   useEffect(() => {
-    const URL = `${basicURL}/trending/movie/${period}?${searchParams}`;
+    const URL = getTrendsUrl('movie', period);
     fetchData(URL, setTrending, setError);
   }, [period]);
 
@@ -39,15 +38,7 @@ export default function Home() {
           fieldSorted={fieldSorted}
           order={order}
         />
-        <TitleBox>
-          <Title>
-            {period === 'week'
-              ? 'Movies trending week'
-              : 'Movies trending today'}
-          </Title>
-
-          <PeriodButtons setPeriod={setPeriod} period={period} />
-        </TitleBox>
+        <TrendingTitle setPeriod={setPeriod} period={period} type={'movie'} />
         <ul>
           {sortedFilmography.map(movie => (
             <MovieItem
