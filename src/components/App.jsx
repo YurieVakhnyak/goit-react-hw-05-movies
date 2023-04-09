@@ -22,20 +22,21 @@ export const App = () => {
     <Routes>
       <Route path="/" element={<SharedLayout />}>
         <Route index element={<Home />} />
-        <Route path="person/:id" element={<PersonDetails />}></Route>
 
         <Route path="movies" element={<Movies />}></Route>
-        <Route path="person" element={<Person />}></Route>
-        <Route path="tv-shows" element={<TVShows />}></Route>
-
         <Route path="movies/:id" element={<MoviesDetails />}>
           <Route path="get-movie-credits" element={<MovieCast />} />
           <Route path="get-movie-reviews" element={<MovieReviews />} />
         </Route>
+
+        <Route path="tv-shows" element={<TVShows />}></Route>
         <Route path="tv-shows/:id" element={<TVShowsDetails />}>
           <Route path="get-tv-credits" element={<TVCast />} />
           <Route path="get-tv-reviews" element={<TVReviews />} />
         </Route>
+
+        <Route path="person" element={<Person />}></Route>
+        <Route path="person/:id" element={<PersonDetails />}></Route>
       </Route>
     </Routes>
   );

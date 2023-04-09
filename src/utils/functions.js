@@ -98,7 +98,22 @@ export function removeDuplicates(arr) {
 }
 
 export const getTrendingTitle = (period, type) => {
-  const mediaType = type === 'tv' ? 'TV Shows' : 'Movies';
+  let mediaType;
+
+  switch (type) {
+    case 'tv':
+      mediaType = 'TV Shows';
+      break;
+    case 'movie':
+      mediaType = 'Movies';
+      break;
+    case 'person':
+      mediaType = 'People';
+      break;
+    default:
+      mediaType = 'Movies';
+  }
+
   const timePeriod = period === 'week' ? 'week' : 'today';
   return `${mediaType} trending ${timePeriod}`;
 };

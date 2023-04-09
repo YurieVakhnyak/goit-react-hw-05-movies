@@ -13,11 +13,11 @@ export const SharedLayout = () => {
           <StyledNavLink to="/tv-shows" activeClassName="active">
             TV Shows
           </StyledNavLink>
-          <StyledNavLink to="/movies" activeClassName="active">
-            Movies
-          </StyledNavLink>
           <StyledNavLink to="/person" activeClassName="active">
             Person
+          </StyledNavLink>
+          <StyledNavLink to="/movies" activeClassName="active">
+            Movies
           </StyledNavLink>
         </Navigation>
       </header>
