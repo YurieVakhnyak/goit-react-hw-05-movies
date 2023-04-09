@@ -170,6 +170,10 @@ input:focus {
   outline: none;
   border: 2px solid darkblue;
 }
+input::placeholder {
+  font-size: 14px;
+  font-weight: 300;
+}
 
 button:active {
   background-color: rgb(32 170 170);

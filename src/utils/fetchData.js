@@ -50,9 +50,11 @@ export function getExtraInfoUrl(id, type, dataType) {
   return URL;
 }
 
-export function getTrendsUrl(type, period) {
+export function getTrendsUrl(type, period, language = 'en') {
+  const newSearchParams = new URLSearchParams(searchParams);
+  newSearchParams.set('language', language);
   const mediaType =
     type === 'tv' ? 'tv' : type === 'person' ? 'person' : 'movie';
-  const URL = `${basicURL}/trending/${mediaType}/${period}?${searchParams}`;
+  const URL = `${basicURL}/trending/${mediaType}/${period}?${newSearchParams}`;
   return URL;
 }

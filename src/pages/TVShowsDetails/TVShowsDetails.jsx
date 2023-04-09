@@ -1,11 +1,13 @@
 import { useParams } from 'react-router-dom';
 import { useState, useEffect, Suspense } from 'react';
-import { Link, Outlet, useLocation } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 import { Container, Title } from 'pages/Home/Home.styled';
 import { BackLinkButton } from 'components/BackLinkButton/BackLinkButton';
 import { fetchData, getImageUrl } from 'utils/fetchData';
 import { formateDate, voteToPersent } from 'utils/functions';
 import { searchParams, basicURL } from 'utils/constants';
+import { StyledNavLink } from 'components/SharedLayout/SharedLayout.styled';
+
 import {
   MediumTitle,
   GenreList,
@@ -68,12 +70,20 @@ export default function TVShowsDetails() {
         <MoreInfoBox>
           <MediumTitle>Additionals information</MediumTitle>
           <Thumb>
-            <Link to="get-tv-credits" state={{ from: location.state?.from }}>
+            <StyledNavLink
+              to="get-tv-credits"
+              state={{ from: location.state?.from }}
+              activeclassname="active"
+            >
               Cast
-            </Link>
-            <Link to="get-tv-reviews" state={{ from: location.state?.from }}>
+            </StyledNavLink>
+            <StyledNavLink
+              to="get-tv-reviews"
+              state={{ from: location.state?.from }}
+              activeclassname="active"
+            >
               Reviews
-            </Link>
+            </StyledNavLink>
           </Thumb>
         </MoreInfoBox>
         <Suspense fallback={<div>Loading subpage...</div>}>

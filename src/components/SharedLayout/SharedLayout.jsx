@@ -7,16 +7,16 @@ export const SharedLayout = () => {
     <div>
       <header>
         <Navigation>
-          <StyledNavLink exact to="/" activeClassName="active">
+          <StyledNavLink to="/" activeclassname="active">
             Home
           </StyledNavLink>
-          <StyledNavLink to="/tv-shows" activeClassName="active">
+          <StyledNavLink to="/tv-shows" activeclassname="active">
             TV Shows
           </StyledNavLink>
-          <StyledNavLink to="/person" activeClassName="active">
+          <StyledNavLink to="/person" activeclassname="active">
             Person
           </StyledNavLink>
-          <StyledNavLink to="/movies" activeClassName="active">
+          <StyledNavLink to="/movies" activeclassname="active">
             Movies
           </StyledNavLink>
         </Navigation>
