@@ -9,6 +9,7 @@ import { voteToPersent } from 'utils/functions';
 
 export const TVShowsItem = ({
   movie,
+  index,
   hoveredId,
   setHoveredId,
   hoveredImageUrl,
@@ -35,7 +36,7 @@ export const TVShowsItem = ({
         onMouseEnter={() => handleMouseEnter(id, backdrop_path)}
         onMouseLeave={() => handleMouseLeave()}
       >
-        {name}, ({first_air_date?.slice(0, 4) || 'no data'}),{' '}
+        {index + 1}. {name}, ({first_air_date?.slice(0, 4) || 'no data'}),{' '}
         {voteToPersent(vote_average)}
       </StyledLink>
 

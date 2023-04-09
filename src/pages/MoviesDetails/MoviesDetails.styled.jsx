@@ -31,7 +31,7 @@ export const ImageFilm = styled.img`
 
 export const Thumb = styled.div`
   display: flex;
-  flex-direction: column;
+  gap: 50px;
 `;
 export const GenreList = styled.ul`
   display: flex;

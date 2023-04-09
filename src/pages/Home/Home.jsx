@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 import { fetchData, getTrendsUrl } from 'utils/fetchData';
 import { getSortedFilmography } from 'utils/functions';
 import { SortButtons } from 'components/SortButtons/SortButtons';
-import { Container } from './Home.styled';
+import { Container, SortThumb } from './Home.styled';
 import { MovieItem } from 'components/MovieItem/MovieItem';
 import { TrendingTitle } from 'components/TrendingTitle/TrendingTitle';
 
@@ -32,18 +32,21 @@ export default function Home() {
 
     return (
       <Container>
-        <SortButtons
-          setFieldSorted={setFieldSorted}
-          toggleOrder={toggleOrder}
-          fieldSorted={fieldSorted}
-          order={order}
-        />
+        <SortThumb>
+          <SortButtons
+            setFieldSorted={setFieldSorted}
+            toggleOrder={toggleOrder}
+            fieldSorted={fieldSorted}
+            order={order}
+          />
+        </SortThumb>
         <TrendingTitle setPeriod={setPeriod} period={period} type={'movie'} />
         <ul>
-          {sortedFilmography.map(movie => (
+          {sortedFilmography.map((movie, index) => (
             <MovieItem
               key={movie.id}
               movie={movie}
+              index={index}
               hoveredId={hoveredId}
               setHoveredId={setHoveredId}
               hoveredImageUrl={hoveredImageUrl}

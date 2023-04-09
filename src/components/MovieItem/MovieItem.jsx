@@ -5,6 +5,7 @@ import { voteToPersent } from 'utils/functions';
 
 export const MovieItem = ({
   movie,
+  index,
   hoveredId,
   setHoveredId,
   hoveredImageUrl,
@@ -31,7 +32,7 @@ export const MovieItem = ({
         onMouseEnter={() => handleMouseEnter(id, backdrop_path)}
         onMouseLeave={() => handleMouseLeave()}
       >
-        {title}, ({release_date?.slice(0, 4) || 'no data'}),{' '}
+        {index + 1}. {title}, ({release_date?.slice(0, 4) || 'no data'}),{' '}
         {voteToPersent(vote_average)}
       </StyledLink>
 

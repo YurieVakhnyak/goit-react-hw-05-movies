@@ -28,12 +28,12 @@ export const PersonBox = styled.div`
 export const ButtonBox = styled.div`
   padding: 5px;
 `;
-export const SortBox = styled.div`
-  display: flex;
-  justify-content: left;
-  gap: 5px;
-`;
+
 export const FilmBox = styled.div`
   text-align: left;
   min-width: 300px;
+`;
+export const PersonSortBox = styled.div`
+  display: flex;
+  justify-content: center;
 `;

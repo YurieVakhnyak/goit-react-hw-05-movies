@@ -9,6 +9,7 @@ import {
   PersonContainer,
   FilmBox,
   PersonBox,
+  PersonSortBox,
   PersonList,
   ButtonBox,
 } from './PersonDetails.styled';
@@ -67,19 +68,22 @@ export default function Person() {
             </MediumTitle>
           </PersonBox>
           <FilmBox>
-            <SortButtons
-              setFieldSorted={setFieldSorted}
-              toggleOrder={toggleOrder}
-              fieldSorted={fieldSorted}
-              order={order}
-            />
+            <PersonSortBox>
+              <SortButtons
+                setFieldSorted={setFieldSorted}
+                toggleOrder={toggleOrder}
+                fieldSorted={fieldSorted}
+                order={order}
+              />
+            </PersonSortBox>
             <MediumTitle style={{ textAlign: 'center', marginBottom: '20px' }}>
               Filmography
             </MediumTitle>
             <PersonList>
-              {sortedFilmography.map(movie => (
+              {sortedFilmography.map((movie, index) => (
                 <MovieItem
                   key={movie.id}
+                  index={index}
                   movie={movie}
                   hoveredId={hoveredId}
                   setHoveredId={setHoveredId}

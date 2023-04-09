@@ -38,10 +38,11 @@ const Movies = () => {
       <Container>
         <SearchBar value={queryInput} onSearch={handleSearchParams} />
         <ul>
-          {sortedMovies.map(movie => (
+          {sortedMovies.map((movie, index) => (
             <MovieItem
               key={movie.id}
               movie={movie}
+              index={index}
               hoveredId={hoveredId}
               setHoveredId={setHoveredId}
               hoveredImageUrl={hoveredImageUrl}

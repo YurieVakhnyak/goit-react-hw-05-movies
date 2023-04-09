@@ -45,7 +45,10 @@ export default function MoviesDetails() {
         <Box>
           <BoxInside>
             <BackLinkButton backLinkHref={backLinkHref} />
-            <ImageFilm src={getImageUrl(backdrop_path)} alt={title} />
+            <ImageFilm
+              src={getImageUrl(backdrop_path, false, 'media')}
+              alt={title}
+            />
           </BoxInside>
           <InfoBox>
             <Title>{title}</Title>

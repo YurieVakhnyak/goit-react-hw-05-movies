@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 import { fetchData, getTrendsUrl } from 'utils/fetchData';
 import { getSortedFilmography } from 'utils/functions';
 import { SortButtons } from 'components/SortButtons/SortButtons';
-import { Container } from 'pages/Home/Home.styled';
+import { Container, SortThumb } from 'pages/Home/Home.styled';
 import { TVShowsItem } from 'components/TVShowsItem/TVShowsItem';
 import { TrendingTitle } from 'components/TrendingTitle/TrendingTitle';
 
@@ -34,18 +34,21 @@ export default function TVShows() {
 
     return (
       <Container>
-        <SortButtons
-          setFieldSorted={setFieldSorted}
-          toggleOrder={toggleOrder}
-          fieldSorted={fieldSorted}
-          order={order}
-        />
+        <SortThumb>
+          <SortButtons
+            setFieldSorted={setFieldSorted}
+            toggleOrder={toggleOrder}
+            fieldSorted={fieldSorted}
+            order={order}
+          />
+        </SortThumb>
         <TrendingTitle setPeriod={setPeriod} period={period} type={'tv'} />
         <ul>
-          {sortedFilmography.map(movie => (
+          {sortedFilmography.map((movie, index) => (
             <TVShowsItem
               key={movie.id}
               movie={movie}
+              index={index}
               hoveredId={hoveredId}
               setHoveredId={setHoveredId}
               hoveredImageUrl={hoveredImageUrl}

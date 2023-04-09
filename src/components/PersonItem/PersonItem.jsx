@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { Text, Card, Image } from 'components/MovieCast/MovieCast.styled';
 import { getImageUrl } from 'utils/fetchData';
 
-export const PersonItem = ({ person, location }) => {
+export const PersonItem = ({ person, location, index }) => {
   const {
     id,
     name,
@@ -14,7 +14,9 @@ export const PersonItem = ({ person, location }) => {
       <Link to={`/person/${id}`} state={{ from: location }}>
         <Card>
           <Image src={getImageUrl(profile_path, true)} alt={name} />
-          <p>{name}</p>
+          <p>
+            {index + 1}. {name}
+          </p>
           <Text></Text>
         </Card>
       </Link>

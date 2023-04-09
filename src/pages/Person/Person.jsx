@@ -25,8 +25,13 @@ export default function Person() {
       <Container>
         <TrendingTitle setPeriod={setPeriod} period={period} type={'person'} />
         <CastList>
-          {results.map(person => (
-            <PersonItem key={person.id} person={person} location={location} />
+          {results.map((person, index) => (
+            <PersonItem
+              key={person.id}
+              person={person}
+              location={location}
+              index={index}
+            />
           ))}
         </CastList>
       </Container>

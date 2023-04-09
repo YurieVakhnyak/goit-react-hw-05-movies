@@ -5,6 +5,7 @@ import {
   basicBigImageURL,
 } from './constants';
 import hasNotPhotoPerson from '../images/NoPhotoPerson.png';
+import hasNotFilmImage from '../images/NoFilmImage.png';
 
 export function fetchData(url, setData, setError) {
   fetch(url)
@@ -32,13 +33,13 @@ export function fetchImage(imageUrl, setHoveredImageUrl) {
     .catch(error => console.error(error));
 }
 
-export function getImageUrl(profilePath, small = false) {
-  if (profilePath) {
+export function getImageUrl(imagePath, small = false, type = 'person') {
+  if (imagePath) {
     return small
-      ? basicSmallImageURL + profilePath
-      : basicBigImageURL + profilePath;
+      ? basicSmallImageURL + imagePath
+      : basicBigImageURL + imagePath;
   } else {
-    return hasNotPhotoPerson;
+    return type === 'person' ? hasNotPhotoPerson : hasNotFilmImage;
   }
 }
 
@@ -49,11 +50,6 @@ export function getExtraInfoUrl(id, type, dataType) {
   return URL;
 }
 
-// export function getTrendsUrl(type, period) {
-//   const mediaType = type === 'tv' ? 'tv' : 'movie';
-//   const URL = `${basicURL}/trending/${mediaType}/${period}?${searchParams}`;
-//   return URL;
-// }
 export function getTrendsUrl(type, period) {
   const mediaType =
     type === 'tv' ? 'tv' : type === 'person' ? 'person' : 'movie';
