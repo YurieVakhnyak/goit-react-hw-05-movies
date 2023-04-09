@@ -1,7 +1,7 @@
 import { FaLongArrowAltDown, FaLongArrowAltUp } from 'react-icons/fa';
 
 import { Button } from 'components/BackLinkButton/BackLinkButton.styled';
-import { SortBox } from 'pages/Person/Person.styled';
+import { SortBox } from 'pages/PersonDetails/PersonDetails.styled';
 export function SortButtons({
   setFieldSorted,
   toggleOrder,

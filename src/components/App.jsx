@@ -12,6 +12,7 @@ const TVShowsDetails = lazy(() =>
 );
 const TVShows = lazy(() => import('pages/TVShows/TVShows'));
 const Person = lazy(() => import('pages/Person/Person'));
+const PersonDetails = lazy(() => import('pages/PersonDetails/PersonDetails'));
 const MovieReviews = lazy(() => import('./MovieReviews/MovieReviews'));
 const TVReviews = lazy(() => import('./TVReviews/TVReviews'));
 const MovieCast = lazy(() => import('./MovieCast/MovieCast'));
@@ -21,9 +22,10 @@ export const App = () => {
     <Routes>
       <Route path="/" element={<SharedLayout />}>
         <Route index element={<Home />} />
-        <Route path="person/:id" element={<Person />}></Route>
+        <Route path="person/:id" element={<PersonDetails />}></Route>
 
         <Route path="movies" element={<Movies />}></Route>
+        <Route path="person" element={<Person />}></Route>
         <Route path="tv-shows" element={<TVShows />}></Route>
 
         <Route path="movies/:id" element={<MoviesDetails />}>
