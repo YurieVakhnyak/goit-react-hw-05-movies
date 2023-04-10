@@ -8,7 +8,7 @@ export const TitleBox = styled.div`
   min-height: 50px;
   justify-content: space-around;
   align-items: center;
-  min-width: 370px;
+  min-width: 350px;
   max-width: 530px;
   @media (max-width: 520px) {
     flex-wrap: wrap;
@@ -26,6 +26,9 @@ export const Title = styled.h1`
 `;
 export const ButtonThumb = styled.div`
   margin-top: 10px;
+  @media (max-width: 421px) {
+    margin-bottom: 5px;
+  }
   @media (max-width: 520px) {
     margin-top: 0px;
   }

@@ -25,7 +25,9 @@ export const MovieItem = ({
     movie;
   return (
     <LiDecor key={id}>
+      {/* <div style={{ height: '24px', width: '16px' }}> */}
       <StyledFilmIcon />
+      {/* </div> */}
       <StyledLink
         to={`/movies/${id}`}
         state={{ from: location }}

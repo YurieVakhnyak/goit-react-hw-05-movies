@@ -13,18 +13,19 @@ export const Navigation = styled.nav`
   text-align: center;
   align-items: center;
 
-  @media (max-width: 400px) {
-    gap: 5px;
-    // background-color: pink;
-    min-width: 370px;
-    font-size: 19px;
+  @media (max-width: 500px) {
+    gap: 15px;
   }
+
   @media (max-width: 440px) {
     font-size: 20px;
     gap: 7px;
   }
-  @media (max-width: 500px) {
-    gap: 15px;
+
+  @media (max-width: 400px) {
+    gap: 5px;
+    min-width: 370px;
+    font-size: 19px;
   }
 `;
 

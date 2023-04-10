@@ -5,14 +5,12 @@ import { Link } from 'react-router-dom';
 export const StyledLink = styled(Link)`
   padding: 5px;
   position: relative;
+  vertical-align: middle;
 `;
 export const StyledFilmIcon = styled(HiFilm)`
-  padding: 5px 0 5px 0;
-  // color: darkblue;
+  vertical-align: middle;
 `;
 
 export const LiDecor = styled.li`
-  display: flex;
-  align-items: start;
-  gap: 5px;
+  min-height: 30px;
 `;

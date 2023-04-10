@@ -33,11 +33,13 @@ export default function TVShowsDetails() {
   }, [id]);
 
   if (movie) {
-    console.log(movie);
+    // console.log('TV:', movie);
 
     const {
       backdrop_path,
-      title,
+      networks,
+      seasons,
+      name,
       first_air_date,
       last_air_date,
       vote_average,
@@ -50,13 +52,17 @@ export default function TVShowsDetails() {
         <Box>
           <BoxInside>
             <BackLinkButton backLinkHref={backLinkHref} />
-            <ImageFilm src={getImageUrl(backdrop_path)} alt={title} />
+            <ImageFilm src={getImageUrl(backdrop_path)} alt={name} />
           </BoxInside>
           <InfoBox>
-            <Title>{title}</Title>
-            <p>User score: {voteToPersent(vote_average)}</p>
-            <p>First air date: {formateDate(first_air_date)}</p>
-            <p>Last air date: {formateDate(last_air_date)}</p>
+            <Title style={{ padding: '10px 0 10px 0' }}>{name}</Title>
+            <div style={{ columnCount: 2 }}>
+              <p>User score: {voteToPersent(vote_average)}</p>
+              <p>Total episodes: {networks.length}</p>
+              <p>Total seasons: {seasons.length}</p>
+              <p>First air date: {formateDate(first_air_date)}</p>
+              <p>Last air date: {formateDate(last_air_date)}</p>
+            </div>
             <MediumTitle>Overview</MediumTitle>
             <p>{overview}</p>
             <MediumTitle>Genres</MediumTitle>
