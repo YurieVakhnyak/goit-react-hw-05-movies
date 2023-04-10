@@ -79,7 +79,7 @@ export default function Person() {
             <MediumTitle style={{ textAlign: 'center', marginBottom: '20px' }}>
               Filmography
             </MediumTitle>
-            <PersonList>
+            <PersonList style={{ listStyle: 'none' }}>
               {sortedFilmography.map((movie, index) => (
                 <MovieItem
                   key={movie.id}

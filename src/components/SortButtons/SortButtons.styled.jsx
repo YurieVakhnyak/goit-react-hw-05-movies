@@ -5,7 +5,8 @@ export const SortBox = styled.div`
   display: flex;
   gap: 10px;
   @media (max-width: 430px) {
-    gap: 5px;
+    gap: 10px;
+    margin-bottom: 5px;
   }
 `;
 export const SortStyledButton = styled(Button)`

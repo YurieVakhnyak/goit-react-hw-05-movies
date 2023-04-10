@@ -129,3 +129,9 @@ export const getTrendingTitle = (period, type) => {
   const timePeriod = period === 'week' ? 'week' : 'today';
   return `${mediaType} trending ${timePeriod}`;
 };
+
+var countries = require('i18n-iso-countries');
+countries.registerLocale(require('i18n-iso-countries/langs/en.json'));
+export function getCountryName(code, language = 'en') {
+  return countries.getName(code, language);
+}

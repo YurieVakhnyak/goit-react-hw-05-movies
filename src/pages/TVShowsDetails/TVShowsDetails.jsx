@@ -4,7 +4,7 @@ import { Outlet, useLocation } from 'react-router-dom';
 import { Container, Title } from 'pages/Home/Home.styled';
 import { BackLinkButton } from 'components/BackLinkButton/BackLinkButton';
 import { fetchData, getImageUrl } from 'utils/fetchData';
-import { formateDate, voteToPersent } from 'utils/functions';
+import { formateDate, voteToPersent, getCountryName } from 'utils/functions';
 import { searchParams, basicURL } from 'utils/constants';
 import { StyledNavLink } from 'components/SharedLayout/SharedLayout.styled';
 
@@ -33,12 +33,13 @@ export default function TVShowsDetails() {
   }, [id]);
 
   if (movie) {
-    // console.log('TV:', movie);
+    console.log('TV:', movie);
 
     const {
       backdrop_path,
-      networks,
-      seasons,
+      origin_country,
+      number_of_episodes,
+      number_of_seasons,
       name,
       first_air_date,
       last_air_date,
@@ -58,13 +59,19 @@ export default function TVShowsDetails() {
             <Title style={{ padding: '10px 0 10px 0' }}>{name}</Title>
             <div style={{ columnCount: 2 }}>
               <p>User score: {voteToPersent(vote_average)}</p>
-              <p>Total episodes: {networks.length}</p>
-              <p>Total seasons: {seasons.length}</p>
+              <p>Number of episodes: {number_of_episodes}</p>
+              <p>Number of seasons: {number_of_seasons}</p>
               <p>First air date: {formateDate(first_air_date)}</p>
               <p>Last air date: {formateDate(last_air_date)}</p>
             </div>
             <MediumTitle>Overview</MediumTitle>
             <p>{overview}</p>
+            <MediumTitle>Origin country</MediumTitle>
+            <GenreList>
+              {origin_country.map((country, index) => (
+                <li key={index}>{getCountryName(country)}</li>
+              ))}
+            </GenreList>
             <MediumTitle>Genres</MediumTitle>
             <GenreList>
               {genres.map(({ id, name }) => (
