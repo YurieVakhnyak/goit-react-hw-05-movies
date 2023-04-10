@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const ModalThumb = styled.div`
   position: absolute;
   width: 250px;
-  transform: translate(30%, -100%);
+  transform: translate(50%, -117%);
   z-index: 99;
   background-color: cadetblue;
   color: white;
