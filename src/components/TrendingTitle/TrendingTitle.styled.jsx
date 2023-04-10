@@ -3,17 +3,22 @@ import { Button } from 'components/BackLinkButton/BackLinkButton.styled';
 
 export const TitleBox = styled.div`
   display: flex;
-  height: 50px;
+  flex-wrap: wrap;
+  min-height: 50px;
   justify-content: space-around;
   align-items: center;
+  min-width: 400px;
   max-width: 480px;
+  @media (max-width: 480px) {
+    justify-content: center;
+  }
 `;
 
 export const Title = styled.h1`
   font-size: xx-large;
   vertical-align: super;
 `;
-export const ButtonThumb = styled.h1`
+export const ButtonThumb = styled.div`
   margin-top: 10px;
 `;
 export const ButtonsChanged = styled(Button)`

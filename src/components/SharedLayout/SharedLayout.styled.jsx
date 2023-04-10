@@ -7,11 +7,25 @@ export const Navigation = styled.nav`
 
   background-color: darkcyan;
 
-  height: 40px;
+  min-height: 40px;
   padding-left: 20px;
   font-size: x-large;
   text-align: center;
   align-items: center;
+
+  @media (max-width: 400px) {
+    gap: 5px;
+    // background-color: pink;
+    min-width: 370px;
+    font-size: 19px;
+  }
+  @media (max-width: 430px) {
+    font-size: 20px;
+    gap: 7px;
+  }
+  @media (max-width: 500px) {
+    gap: 15px;
+  }
 `;
 
 export const StyledNavLink = styled(NavLink)`
@@ -35,12 +49,4 @@ export const StyledNavLink = styled(NavLink)`
       left: 0;
     }
   }
-
-  // &.active {
-  //   border-bottom: 5px solid darkblue;
-  //   font-weight: 500;
-  //   border-radius: 5px;
-  //   line-height: 1.2;
-  //   padding-bottom: 5px;
-  // }
 `;
