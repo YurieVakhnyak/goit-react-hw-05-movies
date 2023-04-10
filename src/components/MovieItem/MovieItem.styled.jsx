@@ -13,4 +13,5 @@ export const StyledFilmIcon = styled(HiFilm)`
 
 export const LiDecor = styled.li`
   min-height: 30px;
+  text-indent: -12px;
 `;
