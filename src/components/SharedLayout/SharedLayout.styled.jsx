@@ -19,7 +19,7 @@ export const Navigation = styled.nav`
     min-width: 370px;
     font-size: 19px;
   }
-  @media (max-width: 430px) {
+  @media (max-width: 440px) {
     font-size: 20px;
     gap: 7px;
   }

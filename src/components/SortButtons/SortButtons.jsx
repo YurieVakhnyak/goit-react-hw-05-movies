@@ -1,7 +1,6 @@
 import { FaLongArrowAltDown, FaLongArrowAltUp } from 'react-icons/fa';
 
-import { Button } from 'components/BackLinkButton/BackLinkButton.styled';
-import { SortBox } from './SortButtons.styled';
+import { SortBox, SortStyledButton } from './SortButtons.styled';
 export function SortButtons({
   setFieldSorted,
   toggleOrder,
@@ -12,15 +11,15 @@ export function SortButtons({
 
   return (
     <SortBox>
-      <Button
+      <SortStyledButton
         className={buttonClass('Trends')}
         onClick={() => {
           setFieldSorted('Trends');
         }}
       >
         Trends
-      </Button>
-      <Button
+      </SortStyledButton>
+      <SortStyledButton
         className={buttonClass('Rating')}
         onClick={() => {
           setFieldSorted('Rating');
@@ -30,9 +29,9 @@ export function SortButtons({
         Rating
         {fieldSorted === 'Rating' &&
           (order ? <FaLongArrowAltUp /> : <FaLongArrowAltDown />)}
-      </Button>
+      </SortStyledButton>
 
-      <Button
+      <SortStyledButton
         className={buttonClass('Date')}
         onClick={() => {
           setFieldSorted('Date');
@@ -42,8 +41,8 @@ export function SortButtons({
         Date
         {fieldSorted === 'Date' &&
           (order ? <FaLongArrowAltUp /> : <FaLongArrowAltDown />)}
-      </Button>
-      <Button
+      </SortStyledButton>
+      <SortStyledButton
         className={buttonClass('Title')}
         onClick={() => {
           setFieldSorted('Title');
@@ -53,7 +52,7 @@ export function SortButtons({
         Title
         {fieldSorted === 'Title' &&
           (order ? <FaLongArrowAltDown /> : <FaLongArrowAltUp />)}
-      </Button>
+      </SortStyledButton>
     </SortBox>
   );
 }
