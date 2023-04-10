@@ -51,6 +51,7 @@ export default function Home() {
         </Button> */}
         <SortThumb>
           <SortButtons
+            type={'movie'}
             setFieldSorted={setFieldSorted}
             toggleOrder={toggleOrder}
             fieldSorted={fieldSorted}

@@ -2,6 +2,7 @@ import { FaLongArrowAltDown, FaLongArrowAltUp } from 'react-icons/fa';
 
 import { SortBox, SortStyledButton } from './SortButtons.styled';
 export function SortButtons({
+  type,
   setFieldSorted,
   toggleOrder,
   fieldSorted,
@@ -34,7 +35,7 @@ export function SortButtons({
       <SortStyledButton
         className={buttonClass('Date')}
         onClick={() => {
-          setFieldSorted('Date');
+          setFieldSorted(type === 'tv' ? 'AirDate' : 'Date');
           toggleOrder();
         }}
       >
@@ -45,7 +46,7 @@ export function SortButtons({
       <SortStyledButton
         className={buttonClass('Title')}
         onClick={() => {
-          setFieldSorted('Title');
+          setFieldSorted(type === 'tv' ? 'AirDate' : 'Date');
           toggleOrder();
         }}
       >

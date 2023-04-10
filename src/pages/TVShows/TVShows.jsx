@@ -28,7 +28,7 @@ export default function TVShows() {
 
   if (trending) {
     const { results } = trending;
-    console.log(results);
+    // console.log(results);
 
     const sortedFilmography = getSortedFilmography(fieldSorted, results, order);
 
@@ -36,9 +36,10 @@ export default function TVShows() {
       <Container>
         <SortThumb>
           <SortButtons
+            type={'tv'}
             setFieldSorted={setFieldSorted}
-            toggleOrder={toggleOrder}
             fieldSorted={fieldSorted}
+            toggleOrder={toggleOrder}
             order={order}
           />
         </SortThumb>

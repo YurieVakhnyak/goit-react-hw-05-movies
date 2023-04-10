@@ -54,28 +54,40 @@ export function toggleOrder(order) {
   return !order;
 }
 
-export const getSortedFilmography = (fieldSorted, cast, order) => {
+export const getSortedFilmography = (fieldSorted, list, order) => {
   let sortedFilmography;
 
   switch (fieldSorted) {
     case 'Trends':
-      sortedFilmography = cast;
+      sortedFilmography = list;
       break;
     case 'Rating':
-      const withoutLowVotes = makeWithoutLowVotes(cast);
+      const withoutLowVotes = makeWithoutLowVotes(list);
       sortedFilmography = sortByField(withoutLowVotes, 'vote_average', order);
       break;
     case 'Date':
-      const newArrayByDate = makeNewArray(cast);
+      const newArrayByDate = makeNewArray(list);
       sortedFilmography = sortByField(newArrayByDate, 'release_date', order);
       break;
+    case 'AirDate':
+      const newArrayByAirDate = makeNewArray(list);
+      sortedFilmography = sortByField(
+        newArrayByAirDate,
+        'first_air_date',
+        order
+      );
+      break;
     case 'Title':
-      const newArrayByTitle = makeNewArray(cast);
+      const newArrayByTitle = makeNewArray(list);
       sortedFilmography = sortByField(newArrayByTitle, 'title', order);
+      break;
+    case 'Name':
+      const newArrayByName = makeNewArray(list);
+      sortedFilmography = sortByField(newArrayByName, 'name', order);
       break;
 
     default:
-      sortedFilmography = cast;
+      sortedFilmography = list;
   }
 
   return sortedFilmography;
