@@ -34,6 +34,7 @@ export default function MoviesDetails() {
   if (movie) {
     const {
       backdrop_path,
+      production_countries,
       title,
       release_date,
       vote_average,
@@ -57,6 +58,12 @@ export default function MoviesDetails() {
             <p>Release date: {formateDate(release_date)}</p>
             <MediumTitle>Overview</MediumTitle>
             <p>{overview}</p>
+            <MediumTitle>Origin country</MediumTitle>
+            <GenreList>
+              {production_countries.map((country, index) => (
+                <li key={index}>{country.name}</li>
+              ))}
+            </GenreList>
             <MediumTitle>Genres</MediumTitle>
             <GenreList>
               {genres.map(({ id, name }) => (

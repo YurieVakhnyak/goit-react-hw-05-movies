@@ -35,7 +35,8 @@ export const Thumb = styled.div`
 `;
 export const GenreList = styled.ul`
   display: flex;
-  gap: 10px;
+  flex-wrap: wrap;
+  gap: 15px;
 `;
 
 export const BoxInside = styled.div`
