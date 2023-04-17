@@ -2,9 +2,8 @@ import { Container } from 'pages/Home/Home.styled';
 import { useSearchParams, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { SearchBar } from '../../components/SearchBar/SearchBar';
-import { MovieItem } from 'components/MovieItem/MovieItem';
+import { MoviesList } from '../../components/MovieList/MovieList';
 import { fetchData } from 'utils/fetchData';
-import { sortByField } from 'utils/functions';
 import { API_KEY, basicURL } from 'utils/constants';
 
 const Movies = () => {
@@ -32,25 +31,19 @@ const Movies = () => {
     }
   }, [queryInput]);
 
+  const movieProps = {
+    hoveredId,
+    setHoveredId,
+    hoveredImageUrl,
+    setHoveredImageUrl,
+    location,
+  };
+
   if (movies) {
-    const sortedMovies = sortByField(movies.results, 'release_date');
     return (
       <Container>
         <SearchBar value={queryInput} onSearch={handleSearchParams} />
-        <ul>
-          {sortedMovies.map((movie, index) => (
-            <MovieItem
-              key={movie.id}
-              movie={movie}
-              index={index}
-              hoveredId={hoveredId}
-              setHoveredId={setHoveredId}
-              hoveredImageUrl={hoveredImageUrl}
-              setHoveredImageUrl={setHoveredImageUrl}
-              location={location}
-            />
-          ))}
-        </ul>
+        <MoviesList {...movieProps} movies={movies} />
       </Container>
     );
   }
