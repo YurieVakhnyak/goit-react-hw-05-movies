@@ -10,14 +10,7 @@ export const PersonContainer = styled.div`
     flex-wrap: wrap;
   }
 `;
-export const PersonList = styled.div`
-  column-count: 1;
-  column-gap: 20px;
 
-  @media (min-width: 750px) {
-    column-count: 2;
-  }
-`;
 export const PersonBox = styled.div`
   max-width: 450px;
   min-width: 300px;

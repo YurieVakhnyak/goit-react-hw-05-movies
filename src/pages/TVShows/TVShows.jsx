@@ -4,7 +4,7 @@ import { fetchData, getTrendsUrl } from 'utils/fetchData';
 import { getSortedFilmography } from 'utils/functions';
 import { SortButtons } from 'components/SortButtons/SortButtons';
 import { Container, SortThumb } from 'pages/Home/Home.styled';
-import { TVShowsItem } from 'components/TVShowsItem/TVShowsItem';
+import { TVShowList } from 'components/TVShowList/TVShowList';
 import { TrendingTitle } from 'components/TrendingTitle/TrendingTitle';
 
 export default function TVShows() {
@@ -17,47 +17,44 @@ export default function TVShows() {
   const [error, setError] = useState(null);
   const location = useLocation();
 
+  const type = 'tv';
+
   const toggleOrder = () => {
     setOrder(order ? false : true);
   };
 
   useEffect(() => {
-    const URL = getTrendsUrl('tv', period);
+    const URL = getTrendsUrl(type, period);
     fetchData(URL, setTrending, setError);
   }, [period]);
+  const movieProps = {
+    hoveredId,
+    setHoveredId,
+    hoveredImageUrl,
+    setHoveredImageUrl,
+    location,
+  };
+
+  const sortProps = {
+    type,
+    setFieldSorted,
+    fieldSorted,
+    toggleOrder,
+    order,
+  };
 
   if (trending) {
     const { results } = trending;
-    // console.log(results);
 
     const sortedFilmography = getSortedFilmography(fieldSorted, results, order);
 
     return (
       <Container>
         <SortThumb>
-          <SortButtons
-            type={'tv'}
-            setFieldSorted={setFieldSorted}
-            fieldSorted={fieldSorted}
-            toggleOrder={toggleOrder}
-            order={order}
-          />
+          <SortButtons sortProps={sortProps} />
         </SortThumb>
-        <TrendingTitle setPeriod={setPeriod} period={period} type={'tv'} />
-        <ul>
-          {sortedFilmography.map((movie, index) => (
-            <TVShowsItem
-              key={movie.id}
-              movie={movie}
-              index={index}
-              hoveredId={hoveredId}
-              setHoveredId={setHoveredId}
-              hoveredImageUrl={hoveredImageUrl}
-              setHoveredImageUrl={setHoveredImageUrl}
-              location={location}
-            />
-          ))}
-        </ul>
+        <TrendingTitle setPeriod={setPeriod} period={period} type={type} />
+        <TVShowList {...movieProps} movies={sortedFilmography} />
       </Container>
     );
   }

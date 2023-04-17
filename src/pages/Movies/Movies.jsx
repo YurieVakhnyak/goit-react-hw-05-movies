@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { SearchBar } from '../../components/SearchBar/SearchBar';
 import { MoviesList } from '../../components/MovieList/MovieList';
 import { fetchData } from 'utils/fetchData';
+import { sortByField } from 'utils/functions';
 import { API_KEY, basicURL } from 'utils/constants';
 
 const Movies = () => {
@@ -40,10 +41,11 @@ const Movies = () => {
   };
 
   if (movies) {
+    const sortedMovies = sortByField(movies.results, 'release_date');
     return (
       <Container>
         <SearchBar value={queryInput} onSearch={handleSearchParams} />
-        <MoviesList {...movieProps} movies={movies} />
+        <MoviesList {...movieProps} movies={sortedMovies} />
       </Container>
     );
   }

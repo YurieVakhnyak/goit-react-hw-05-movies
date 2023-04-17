@@ -1,7 +1,6 @@
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import { MovieItem } from 'components/MovieItem/MovieItem';
 import { BackLinkButton } from 'components/BackLinkButton/BackLinkButton';
 import { Container, Title } from 'pages/Home/Home.styled';
 import { MediumTitle } from 'pages/MoviesDetails/MoviesDetails.styled';
@@ -10,9 +9,10 @@ import {
   FilmBox,
   PersonBox,
   PersonSortBox,
-  PersonList,
   ButtonBox,
 } from './PersonDetails.styled';
+
+import { MoviesList } from 'components/MovieList/MovieList';
 import { fetchData, getImageUrl } from 'utils/fetchData';
 import { getSortedFilmography, formateDate } from 'utils/functions';
 import { searchParams, basicURL } from 'utils/constants';
@@ -44,13 +44,23 @@ export default function Person() {
     fetchData(personURL, setPerson, setError);
   }, [id]);
 
+  const type = 'movie';
+
   if (personMoovies && person) {
     const { cast } = personMoovies;
+    const sortProps = { type, setFieldSorted, fieldSorted, toggleOrder, order };
     const sortedFilmography = getSortedFilmography(fieldSorted, cast, order);
     const { name, profile_path, birthday, deathday } = person;
 
     const formattedBirthday = formateDate(birthday);
     const formattedDeathday = formateDate(deathday);
+    const movieProps = {
+      hoveredId,
+      setHoveredId,
+      hoveredImageUrl,
+      setHoveredImageUrl,
+      location,
+    };
 
     return (
       <div>
@@ -69,30 +79,12 @@ export default function Person() {
           </PersonBox>
           <FilmBox>
             <PersonSortBox>
-              <SortButtons
-                setFieldSorted={setFieldSorted}
-                toggleOrder={toggleOrder}
-                fieldSorted={fieldSorted}
-                order={order}
-              />
+              <SortButtons sortProps={sortProps} />
             </PersonSortBox>
             <MediumTitle style={{ textAlign: 'center', marginBottom: '20px' }}>
               Filmography
             </MediumTitle>
-            <PersonList style={{ listStyle: 'none' }}>
-              {sortedFilmography.map((movie, index) => (
-                <MovieItem
-                  key={movie.id}
-                  index={index}
-                  movie={movie}
-                  hoveredId={hoveredId}
-                  setHoveredId={setHoveredId}
-                  hoveredImageUrl={hoveredImageUrl}
-                  setHoveredImageUrl={setHoveredImageUrl}
-                  location={location}
-                />
-              ))}
-            </PersonList>
+            <MoviesList {...movieProps} movies={sortedFilmography} />
           </FilmBox>
         </PersonContainer>
       </div>
@@ -100,3 +92,46 @@ export default function Person() {
   }
   return <Container>{error ? error.message : <p>Searching...</p>}</Container>;
 }
+
+// return (
+//     <div>
+//       <ButtonBox>
+//         <BackLinkButton backLinkHref={backLinkHref} />
+//       </ButtonBox>
+//       <PersonContainer>
+//         <PersonBox>
+//           <img src={getImageUrl(profile_path)} alt={name} height={281} />
+//           {<Title>{name}</Title>}
+//           <MediumTitle>
+//             {deathday
+//               ? `(${formattedBirthday} - ${formattedDeathday})`
+//               : `(${formattedBirthday})`}
+//           </MediumTitle>
+//         </PersonBox>
+//         <FilmBox>
+//           <PersonSortBox>
+//             <SortButtons sortProps={sortProps} />
+//           </PersonSortBox>
+//           <MediumTitle style={{ textAlign: 'center', marginBottom: '20px' }}>
+//             Filmography
+//           </MediumTitle>
+//           <PersonList style={{ listStyle: 'none' }}>
+//             {sortedFilmography.map((movie, index) => (
+//               <MovieItem
+//                 key={movie.id}
+//                 index={index}
+//                 movie={movie}
+//                 hoveredId={hoveredId}
+//                 setHoveredId={setHoveredId}
+//                 hoveredImageUrl={hoveredImageUrl}
+//                 setHoveredImageUrl={setHoveredImageUrl}
+//                 location={location}
+//               />
+//             ))}
+//           </PersonList>
+//         </FilmBox>
+//       </PersonContainer>
+//     </div>
+//   );
+// }
+// return <Container>{error ? error.message : <p>Searching...</p>}</Container>;
