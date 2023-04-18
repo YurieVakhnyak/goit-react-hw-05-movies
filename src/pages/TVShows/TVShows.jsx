@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
 import { fetchData, getTrendsUrl } from 'utils/fetchData';
 import { getSortedFilmography } from 'utils/functions';
 import { SortButtons } from 'components/SortButtons/SortButtons';
@@ -12,11 +11,7 @@ export default function TVShows() {
   const [fieldSorted, setFieldSorted] = useState(null);
   const [order, setOrder] = useState(true);
   const [period, setPeriod] = useState('day');
-  const [hoveredId, setHoveredId] = useState(null);
-  const [hoveredImageUrl, setHoveredImageUrl] = useState(null);
   const [error, setError] = useState(null);
-  const location = useLocation();
-
   const type = 'tv';
 
   const toggleOrder = () => {
@@ -27,13 +22,6 @@ export default function TVShows() {
     const URL = getTrendsUrl(type, period);
     fetchData(URL, setTrending, setError);
   }, [period]);
-  const movieProps = {
-    hoveredId,
-    setHoveredId,
-    hoveredImageUrl,
-    setHoveredImageUrl,
-    location,
-  };
 
   const sortProps = {
     type,
@@ -54,7 +42,7 @@ export default function TVShows() {
           <SortButtons sortProps={sortProps} />
         </SortThumb>
         <TrendingTitle setPeriod={setPeriod} period={period} type={type} />
-        <TVShowList {...movieProps} movies={sortedFilmography} />
+        <TVShowList movies={sortedFilmography} />
       </Container>
     );
   }

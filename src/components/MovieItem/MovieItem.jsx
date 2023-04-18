@@ -2,15 +2,13 @@ import { LiDecor, StyledLink, StyledFilmIcon } from './MovieItem.styled';
 import { Modal } from 'components/Modal/Modal';
 import { fetchImage } from 'utils/fetchData';
 import { voteToPersent } from 'utils/functions';
+import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
-export const MovieItem = ({ movie, index, ...movieProps }) => {
-  const {
-    hoveredId,
-    setHoveredId,
-    hoveredImageUrl,
-    setHoveredImageUrl,
-    location,
-  } = movieProps;
+export const MovieItem = ({ movie, index }) => {
+  const [hoveredId, setHoveredId] = useState(null);
+  const [hoveredImageUrl, setHoveredImageUrl] = useState(null);
+  const location = useLocation();
 
   const handleMouseEnter = (id, imageUrl) => {
     setHoveredId(id);

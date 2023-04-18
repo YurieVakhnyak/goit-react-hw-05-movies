@@ -24,10 +24,9 @@ export default function Person() {
   const [fieldSorted, setFieldSorted] = useState(null);
   const [order, setOrder] = useState(true);
   const [error, setError] = useState(null);
-  const [hoveredId, setHoveredId] = useState(null);
-  const [hoveredImageUrl, setHoveredImageUrl] = useState(null);
-  const { id } = useParams();
   const location = useLocation();
+
+  const { id } = useParams();
 
   const toggleOrder = () => {
     setOrder(order ? false : true);
@@ -54,19 +53,13 @@ export default function Person() {
 
     const formattedBirthday = formateDate(birthday);
     const formattedDeathday = formateDate(deathday);
-    const movieProps = {
-      hoveredId,
-      setHoveredId,
-      hoveredImageUrl,
-      setHoveredImageUrl,
-      location,
-    };
 
     return (
       <div>
         <ButtonBox>
           <BackLinkButton backLinkHref={backLinkHref} />
         </ButtonBox>
+
         <PersonContainer>
           <PersonBox>
             <img src={getImageUrl(profile_path)} alt={name} height={281} />
@@ -77,6 +70,7 @@ export default function Person() {
                 : `(${formattedBirthday})`}
             </MediumTitle>
           </PersonBox>
+
           <FilmBox>
             <PersonSortBox>
               <SortButtons sortProps={sortProps} />
@@ -84,7 +78,7 @@ export default function Person() {
             <MediumTitle style={{ textAlign: 'center', marginBottom: '20px' }}>
               Filmography
             </MediumTitle>
-            <MoviesList {...movieProps} movies={sortedFilmography} />
+            <MoviesList movies={sortedFilmography} />
           </FilmBox>
         </PersonContainer>
       </div>
@@ -92,46 +86,3 @@ export default function Person() {
   }
   return <Container>{error ? error.message : <p>Searching...</p>}</Container>;
 }
-
-// return (
-//     <div>
-//       <ButtonBox>
-//         <BackLinkButton backLinkHref={backLinkHref} />
-//       </ButtonBox>
-//       <PersonContainer>
-//         <PersonBox>
-//           <img src={getImageUrl(profile_path)} alt={name} height={281} />
-//           {<Title>{name}</Title>}
-//           <MediumTitle>
-//             {deathday
-//               ? `(${formattedBirthday} - ${formattedDeathday})`
-//               : `(${formattedBirthday})`}
-//           </MediumTitle>
-//         </PersonBox>
-//         <FilmBox>
-//           <PersonSortBox>
-//             <SortButtons sortProps={sortProps} />
-//           </PersonSortBox>
-//           <MediumTitle style={{ textAlign: 'center', marginBottom: '20px' }}>
-//             Filmography
-//           </MediumTitle>
-//           <PersonList style={{ listStyle: 'none' }}>
-//             {sortedFilmography.map((movie, index) => (
-//               <MovieItem
-//                 key={movie.id}
-//                 index={index}
-//                 movie={movie}
-//                 hoveredId={hoveredId}
-//                 setHoveredId={setHoveredId}
-//                 hoveredImageUrl={hoveredImageUrl}
-//                 setHoveredImageUrl={setHoveredImageUrl}
-//                 location={location}
-//               />
-//             ))}
-//           </PersonList>
-//         </FilmBox>
-//       </PersonContainer>
-//     </div>
-//   );
-// }
-// return <Container>{error ? error.message : <p>Searching...</p>}</Container>;

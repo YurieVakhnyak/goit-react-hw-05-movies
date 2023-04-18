@@ -6,16 +6,22 @@ import {
 import { Modal } from 'components/Modal/Modal';
 import { fetchImage } from 'utils/fetchData';
 import { voteToPersent } from 'utils/functions';
+import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
 export const TVShowsItem = ({
   movie,
   index,
-  hoveredId,
-  setHoveredId,
-  hoveredImageUrl,
-  setHoveredImageUrl,
-  location,
+  // hoveredId,
+  // setHoveredId,
+  // hoveredImageUrl,
+  // setHoveredImageUrl,
+  // location,
 }) => {
+  const [hoveredId, setHoveredId] = useState(null);
+  const [hoveredImageUrl, setHoveredImageUrl] = useState(null);
+  const location = useLocation();
+
   const handleMouseEnter = (id, imageUrl) => {
     setHoveredId(id);
     fetchImage(imageUrl, setHoveredImageUrl);
