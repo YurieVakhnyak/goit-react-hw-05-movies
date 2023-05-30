@@ -1,3 +1,5 @@
+import { Fragment } from 'react';
+
 export function voteToPersent(vote) {
   if (vote) {
     const persentVote = Math.floor(vote * 10);
@@ -127,7 +129,13 @@ export const getTrendingTitle = (period, type) => {
   }
 
   const timePeriod = period === 'week' ? 'week' : 'today';
-  return `${mediaType} trending ${timePeriod}`;
+  // return `${mediaType} trending <span>${timePeriod}</span>`;
+  return (
+    <Fragment>
+      {`${mediaType} trending `}
+      <span>{timePeriod}</span>
+    </Fragment>
+  );
 };
 
 var countries = require('i18n-iso-countries');

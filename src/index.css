@@ -132,6 +132,7 @@ html {
 
 body {
   margin: 0;
+  color: white;
   padding: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -153,14 +154,16 @@ ol {
 
 a {
   text-decoration: none;
-  color: rgb(0 50 80);
+  color: white;
+  /* color: rgb(0 50 80); */
 }
 
 a:hover {
   color: darkblue;
 }
 a:visited {
-  color: rgb(20, 42, 41);
+  /* color: rgb(20, 42, 41); */
+  color: rgb(196, 223, 221);
 }
 
 input {
@@ -176,6 +179,10 @@ input::placeholder {
   font-weight: 300;
 }
 
+button {
+  color: white;
+}
+
 button:active {
   background-color: rgb(32 170 170);
 }
@@ -183,4 +190,8 @@ button:active {
 button:focus {
   color: rgb(0 0 140);
   /* align-items:baseline; */
+}
+
+.ButtonsChanged:hover + span {
+  text-decoration: underline;
 }

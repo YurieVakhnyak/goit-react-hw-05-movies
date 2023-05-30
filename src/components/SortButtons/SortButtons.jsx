@@ -1,4 +1,7 @@
-import { FaLongArrowAltDown, FaLongArrowAltUp } from 'react-icons/fa';
+import {
+  StyledFaLongArrowAltDown,
+  StyledFaLongArrowAltUp,
+} from './SortButtons.styled';
 
 import { SortBox, SortStyledButton } from './SortButtons.styled';
 export function SortButtons({ sortProps }) {
@@ -24,7 +27,7 @@ export function SortButtons({ sortProps }) {
       >
         Rating
         {fieldSorted === 'Rating' &&
-          (order ? <FaLongArrowAltUp /> : <FaLongArrowAltDown />)}
+          (order ? <StyledFaLongArrowAltDown /> : <StyledFaLongArrowAltUp />)}
       </SortStyledButton>
 
       <SortStyledButton
@@ -36,7 +39,7 @@ export function SortButtons({ sortProps }) {
       >
         Date
         {(fieldSorted === 'Date' || fieldSorted === 'AirDate') &&
-          (order ? <FaLongArrowAltUp /> : <FaLongArrowAltDown />)}
+          (order ? <StyledFaLongArrowAltDown /> : <StyledFaLongArrowAltUp />)}
       </SortStyledButton>
       <SortStyledButton
         className={buttonClass('Title')}
@@ -47,7 +50,7 @@ export function SortButtons({ sortProps }) {
       >
         Title
         {(fieldSorted === 'Title' || fieldSorted === 'Name') &&
-          (order ? <FaLongArrowAltDown /> : <FaLongArrowAltUp />)}
+          (order ? <StyledFaLongArrowAltUp /> : <StyledFaLongArrowAltDown />)}
       </SortStyledButton>
     </SortBox>
   );

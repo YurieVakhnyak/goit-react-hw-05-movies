@@ -36,6 +36,12 @@ export const ButtonThumb = styled.div`
 export const ButtonsChanged = styled(Button)`
   min-width: 100px;
   &:focus {
-    color: black;
+    // color: darkblue;
+  }
+  &:hover {
+    color: blue;
+  }
+  &:hover + span {
+    text-decoration: underline;
   }
 `;
