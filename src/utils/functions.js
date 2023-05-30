@@ -111,7 +111,7 @@ export function removeDuplicates(arr) {
   return uniqueArr;
 }
 
-export const getTrendingTitle = (period, type) => {
+export const getTrendingTitle = (period, type, isHovered) => {
   let mediaType;
 
   switch (type) {
@@ -129,13 +129,15 @@ export const getTrendingTitle = (period, type) => {
   }
 
   const timePeriod = period === 'week' ? 'week' : 'today';
-  // return `${mediaType} trending <span>${timePeriod}</span>`;
   return (
     <Fragment>
-      {`${mediaType} trending `}
-      <span>{timePeriod}</span>
+      {mediaType} trending{' '}
+      <span style={{ textDecoration: isHovered ? 'underline' : 'none' }}>
+        {timePeriod}
+      </span>
     </Fragment>
   );
+  // `${mediaType} trending ${timePeriod} `;
 };
 
 var countries = require('i18n-iso-countries');

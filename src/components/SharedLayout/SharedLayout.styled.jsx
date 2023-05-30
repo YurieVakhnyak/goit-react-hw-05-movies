@@ -30,9 +30,12 @@ export const Navigation = styled.nav`
 `;
 
 export const StyledNavLink = styled(NavLink)`
-  color: #000;
+  color: white;
   text-decoration: none;
   margin-right: 10px;
+  & hover {
+    color: darkblue;
+  }
 
   &.active {
     font-weight: 500;

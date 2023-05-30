@@ -157,13 +157,12 @@ a {
   color: white;
   /* color: rgb(0 50 80); */
 }
-
-a:hover {
-  color: darkblue;
-}
 a:visited {
   /* color: rgb(20, 42, 41); */
   color: rgb(196, 223, 221);
+}
+a:hover {
+  color: darkblue;
 }
 
 input {
@@ -190,8 +189,4 @@ button:active {
 button:focus {
   color: rgb(0 0 140);
   /* align-items:baseline; */
-}
-
-.ButtonsChanged:hover + span {
-  text-decoration: underline;
 }

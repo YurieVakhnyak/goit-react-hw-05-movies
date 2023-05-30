@@ -37,11 +37,9 @@ export const ButtonsChanged = styled(Button)`
   min-width: 100px;
   &:focus {
     // color: darkblue;
+    // color: white;
   }
   &:hover {
     color: blue;
-  }
-  &:hover + span {
-    text-decoration: underline;
   }
 `;
