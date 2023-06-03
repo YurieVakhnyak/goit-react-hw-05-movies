@@ -2,6 +2,7 @@ import { Routes, Route } from 'react-router-dom';
 import { lazy } from 'react';
 import { SharedLayout } from './SharedLayout/SharedLayout';
 import { NotFound } from './NotFound/NotFound';
+// import { useEffect } from 'react';
 
 const Home = lazy(() => import('pages/Home/Home'));
 const Movies = lazy(() => import('pages/Movies/Movies'));
@@ -18,6 +19,7 @@ const MovieReviews = lazy(() => import('./MovieReviews/MovieReviews'));
 const TVReviews = lazy(() => import('./TVReviews/TVReviews'));
 const MovieCast = lazy(() => import('./MovieCast/MovieCast'));
 const TVCast = lazy(() => import('./TVCast/TVCast'));
+
 export const App = () => {
   return (
     <Routes>

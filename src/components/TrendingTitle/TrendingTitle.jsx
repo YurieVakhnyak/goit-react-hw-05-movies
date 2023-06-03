@@ -15,11 +15,7 @@ export const TrendingTitle = ({ setPeriod, period, type }) => {
   };
   return (
     <TitleBox>
-      <Title>
-        {getTrendingTitle(period, type, isHovered)}
-        {/* prosto kin'
-        <span style={{ color: isHovered ? 'red' : 'yellow' }}>Horse</span> */}
-      </Title>
+      <Title>{getTrendingTitle(period, type, isHovered)}</Title>
       <ButtonThumb>
         <ButtonsChanged
           onMouseEnter={() => setIsHovered(true)}
