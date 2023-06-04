@@ -4,6 +4,7 @@ import { Navigation, StyledNavLink } from './SharedLayout.styled';
 import { useEffect, useState } from 'react';
 import jwt_decode from 'jwt-decode';
 import { Button } from 'components/BackLinkButton/BackLinkButton.styled';
+import { Text } from 'components/MovieCast/MovieCast.styled';
 
 const clientId =
   '676815062993-8gpaproudnitoljc2665jgnm7mrmamci.apps.googleusercontent.com';
@@ -25,15 +26,32 @@ export const SharedLayout = () => {
   }
 
   useEffect(() => {
-    // global google
-    google.accounts.id.initialize({
-      client_id: clientId,
-      callback: handleCallbackResponse,
-    });
-    google.accounts.id.renderButton(document.getElementById('signInDiv'), {
-      theme: 'outline',
-      size: 'large',
-    });
+    const initializeGoogleSignIn = async () => {
+      await new Promise((resolve, reject) => {
+        const script = document.createElement('script');
+        script.src = 'https://accounts.google.com/gsi/client';
+        script.async = true;
+        script.defer = true;
+        script.onload = resolve;
+        script.onerror = reject;
+        document.body.appendChild(script);
+      });
+
+      window.google.accounts.id.initialize({
+        client_id: clientId,
+        callback: handleCallbackResponse,
+      });
+
+      window.google.accounts.id.renderButton(
+        document.getElementById('signInDiv'),
+        {
+          theme: 'outline',
+          size: 'large',
+        }
+      );
+    };
+
+    initializeGoogleSignIn();
   }, []);
 
   return (
@@ -56,12 +74,13 @@ export const SharedLayout = () => {
           <div
             style={{
               marginLeft: 'auto',
+              marginRight: '10px',
               display: 'flex',
               alignItems: 'center',
               gap: '30px',
             }}
           >
-            {Object.keys(user).length != 0 && (
+            {Object.keys(user).length !== 0 && (
               <Button onClick={e => handleSignOut(e)}>Sign out</Button>
             )}
             {user && (
@@ -69,8 +88,9 @@ export const SharedLayout = () => {
                 <img
                   style={{ borderRadius: '50%', width: '35px' }}
                   src={user.picture}
+                  alt={user.name}
                 ></img>
-                <div src={user.name}></div>
+                <Text>{user.name}</Text>
               </div>
             )}
           </div>
